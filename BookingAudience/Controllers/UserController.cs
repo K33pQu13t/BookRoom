@@ -39,6 +39,11 @@ namespace BookingAudience.Controllers
             _userAdministratingService = new UserAdministratingService(context);
         }
 
+        public IActionResult AdminPanel()
+        {
+            return View("Admin");
+        }
+
         public IActionResult CreateBuilding()
         {
             return View("Adminb");
