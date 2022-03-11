@@ -716,10 +716,6 @@ C:\Users\Jogee\Desktop\BookRoom\BookingAudience\obj\Debug\net5.0\Razor\Views\Hom
 C:\Users\Jogee\Desktop\BookRoom\BookingAudience\obj\Debug\net5.0\Razor\Views\Home\Privacy.cshtml.g.cs
 C:\Users\Jogee\Desktop\BookRoom\BookingAudience\obj\Debug\net5.0\Razor\Views\Shared\_Layout.cshtml.g.cs
 C:\Users\Jogee\Desktop\BookRoom\BookingAudience\obj\Debug\net5.0\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
-C:\Users\Jogee\Desktop\BookRoom\BookingAudience\obj\Debug\net5.0\Razor\Views\User\Admin.cshtml.g.cs
-C:\Users\Jogee\Desktop\BookRoom\BookingAudience\obj\Debug\net5.0\Razor\Views\User\Admina.cshtml.g.cs
-C:\Users\Jogee\Desktop\BookRoom\BookingAudience\obj\Debug\net5.0\Razor\Views\User\Adminb.cshtml.g.cs
-C:\Users\Jogee\Desktop\BookRoom\BookingAudience\obj\Debug\net5.0\Razor\Views\User\Adminu.cshtml.g.cs
 C:\Users\Jogee\Desktop\BookRoom\BookingAudience\obj\Debug\net5.0\Razor\Views\_ViewImports.cshtml.g.cs
 C:\Users\Jogee\Desktop\BookRoom\BookingAudience\obj\Debug\net5.0\Razor\Views\_ViewStart.cshtml.g.cs
 C:\Users\Jogee\Desktop\BookRoom\BookingAudience\obj\Debug\net5.0\BookingAudience.RazorTargetAssemblyInfo.cache
@@ -736,3 +732,7 @@ C:\Dirs\My codes\ASP NET\GitHub\BookingAudience\BookingAudience\obj\Debug\net5.0
 C:\Dirs\My codes\ASP NET\GitHub\BookingAudience\BookingAudience\obj\Debug\net5.0\Razor\Views\User\Admina.cshtml.g.cs
 C:\Dirs\My codes\ASP NET\GitHub\BookingAudience\BookingAudience\obj\Debug\net5.0\Razor\Views\User\Adminb.cshtml.g.cs
 C:\Dirs\My codes\ASP NET\GitHub\BookingAudience\BookingAudience\obj\Debug\net5.0\Razor\Views\User\Adminu.cshtml.g.cs
+C:\Users\Jogee\Desktop\BookRoom\BookingAudience\obj\Debug\net5.0\Razor\Views\User\AdminAudience.cshtml.g.cs
+C:\Users\Jogee\Desktop\BookRoom\BookingAudience\obj\Debug\net5.0\Razor\Views\User\AdminBuilding.cshtml.g.cs
+C:\Users\Jogee\Desktop\BookRoom\BookingAudience\obj\Debug\net5.0\Razor\Views\User\AdminPanel.cshtml.g.cs
+C:\Users\Jogee\Desktop\BookRoom\BookingAudience\obj\Debug\net5.0\Razor\Views\User\AdminUser.cshtml.g.cs

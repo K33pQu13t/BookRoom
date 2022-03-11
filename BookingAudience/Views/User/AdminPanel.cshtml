@@ -1,4 +1,6 @@
-﻿@{
+﻿@using BookingAudience.ViewModels;
+
+@{
     ViewData["Title"] = "Administrate";
 }
 
@@ -6,9 +8,9 @@
     <div class="category-title">@ViewData["Title"]</div>
     <div class="view-page">
 
-        @await Html.PartialAsync("AdminBuilding");
-        @await Html.PartialAsync("AdminAudience");
-        @await Html.PartialAsync("AdminUser");
+        @await Html.PartialAsync("AdminBuilding", new BuildingViewModel());
+        @await Html.PartialAsync("AdminAudience", new AudienceViewModel());
+        @await Html.PartialAsync("AdminUser", new RegisterViewModel());
 
     </div>
 </div>
