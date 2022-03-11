@@ -45,5 +45,15 @@ namespace BookingAudience.Services.Audiences
         {
             return await _audiencesRepository.GetAsync(id);
         }
+
+        public List<Audience> GetAllAudiences()
+        {
+            return _audiencesRepository.Get().ToList();
+        }
+
+        public List<Building> GetAllBuildings()
+        {
+            return _buildingsRepository.Get().ToList();
+        }
     }
 }
