@@ -8,22 +8,22 @@ using System.Threading.Tasks;
 
 namespace BookingAudience.Services.Audiences
 {
-    public class AudiencesManagementService
+    public class CorpusManagementService
     {
         private readonly IGenericRepository<Audience> _audiencesRepository;
         private readonly IGenericRepository<Building> _buildingsRepository;
 
-        public AudiencesManagementService(IGenericRepository<Audience> audiencesRepository, IGenericRepository<Building> buildingsRepository)
+        public CorpusManagementService(IGenericRepository<Audience> audiencesRepository, IGenericRepository<Building> buildingsRepository)
         {
             _audiencesRepository = audiencesRepository;
             _buildingsRepository = buildingsRepository;
-            Building b = new Building()
-            {
-                Title = "Л корпус",
-                CodeLetter = 'Л',
-                Address = "somewhere"
-            };
-            PushBuildingAsync(b);
+            //Building b = new Building()
+            //{
+            //    Title = "Л корпус",
+            //    CodeLetter = 'Л',
+            //    Address = "somewhere"
+            //};
+            //PushBuildingAsync(b);
         }
 
         public async Task PushBuildingAsync(Building building)

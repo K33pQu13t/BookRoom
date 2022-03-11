@@ -17,7 +17,7 @@ namespace BookingAudience.Models.Users
         /// <summary>
         /// фамилия
         /// </summary>
-        public string SecondName { get; set; }
+        public string LastName { get; set; }
         public DateTime BirthDay { get; set; }
         public string Password { get; set; }
     }

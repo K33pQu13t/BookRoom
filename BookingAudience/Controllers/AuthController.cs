@@ -58,7 +58,8 @@ namespace BookingAudience.Controllers
                 new UserViewModel()
                 {
                     FirstName = user.FirstName,
-                    SecondName = user.SecondName,
+                    LastName = user.LastName,
+                    Email = user.Email,
                     BirthDay = user.BirthDay
                 });
         }

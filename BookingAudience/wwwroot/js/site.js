@@ -1,4 +1,34 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿const body = document.querySelector('body'),
+    sidebar = body.querySelector('nav'),
+    toggle = body.querySelector(".toggle"),
+    searchBtn = body.querySelector(".search-box"),
+    modeSwitch = body.querySelector(".toggle-switch"),
+    modeText = body.querySelector(".mode-text"),
+    collapseSection = Array.from(body.querySelectorAll("div.view-page-section > div.view-page-title"));
 
-// Write your JavaScript code.
+toggle.addEventListener("click", () => {
+    sidebar.classList.toggle("close");
+});
+
+searchBtn.addEventListener("click", () => {
+    sidebar.classList.remove("close");
+});
+
+modeSwitch.addEventListener("click", () => {
+    body.classList.toggle("dark");
+
+    if (body.classList.contains("dark")) {
+        modeText.innerText = "Light mode";
+    } else {
+        modeText.innerText = "Dark mode";
+    }
+});
+
+collapseSection.map((element) => { // TODO: переделать
+    element.addEventListener("click", () => {
+        console.log(element);
+        element.parentElement.classList.toggle("collapsed");
+    });
+});
+
+function toggleViewSection() { };

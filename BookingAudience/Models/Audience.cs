@@ -36,5 +36,6 @@ namespace BookingAudience.Models
         /// номер кабинета. -1 если без номера
         /// </summary>
         public int Number { get; set; } = -1;
+        //todo булевое поле IsCanBook - если false то нельзя букнуть, но не потому что её букнули, просто менеджер решил что нельзя, например там ремонт
     }
 }
