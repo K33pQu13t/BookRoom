@@ -27,8 +27,13 @@ namespace BookingAudience.Controllers
             _usersRepository = (IGenericRepository<AppUser>)provider.GetService(typeof(IGenericRepository<AppUser>));
             _bookingsRepository = (IGenericRepository<Booking>)provider.GetService(typeof(IGenericRepository<Booking>));
             _audiencesRepository = (IGenericRepository<Audience>)provider.GetService(typeof(IGenericRepository<Audience>));
+            _buildingsRepository = (IGenericRepository<Building>)provider.GetService(typeof(IGenericRepository<Building>));
 
             _corpusManagementService = new CorpusManagementService(_audiencesRepository, _buildingsRepository);
+
+            var building = new Building() { Title = "Корпус Л", Address = "Где-то в Красноярске", CodeLetter = 'Л' };
+            //то что ниже расклонировать
+            _corpusManagementService.PushAudienceAsync(new Audience() { Building = building, Floor = 1, Number = 104 }).GetAwaiter().GetResult();
         }
 
         public IActionResult Index()
@@ -39,7 +44,8 @@ namespace BookingAudience.Controllers
         public IActionResult GetAudiences()
         {
             var audiences = _corpusManagementService.GetAllAudiences();
-            return View(new AllAudiencesViewModel() 
+
+            return View(new AllAudiencesViewModel()
             { 
                 
             });
@@ -64,10 +70,9 @@ namespace BookingAudience.Controllers
             return View();
         }
 
-        public async Task<IActionResult> AddBuilding(string title, string address, char codeLetter)
+        public async Task AddBuilding(string title, string address, char codeLetter)
         {
             await _corpusManagementService.PushBuildingAsync(new Building() { Title = title, Address = address, CodeLetter = codeLetter });
-            return View();
         }
     }
 }

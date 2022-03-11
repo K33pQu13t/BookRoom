@@ -728,11 +728,11 @@ C:\Users\Jogee\Desktop\BookRoom\BookingAudience\obj\Debug\net5.0\BookingAudience
 C:\Users\Jogee\Desktop\BookRoom\BookingAudience\obj\Debug\net5.0\BookingAudience.genruntimeconfig.cache
 C:\Users\Jogee\Desktop\BookRoom\BookingAudience\obj\Debug\net5.0\ref\BookingAudience.dll
 C:\Dirs\My codes\ASP NET\GitHub\BookingAudience\BookingAudience\obj\Debug\net5.0\Razor\Views\Corpus\Index.cshtml.g.cs
-C:\Dirs\My codes\ASP NET\GitHub\BookingAudience\BookingAudience\obj\Debug\net5.0\Razor\Views\User\Admin.cshtml.g.cs
-C:\Dirs\My codes\ASP NET\GitHub\BookingAudience\BookingAudience\obj\Debug\net5.0\Razor\Views\User\Admina.cshtml.g.cs
-C:\Dirs\My codes\ASP NET\GitHub\BookingAudience\BookingAudience\obj\Debug\net5.0\Razor\Views\User\Adminb.cshtml.g.cs
-C:\Dirs\My codes\ASP NET\GitHub\BookingAudience\BookingAudience\obj\Debug\net5.0\Razor\Views\User\Adminu.cshtml.g.cs
 C:\Users\Jogee\Desktop\BookRoom\BookingAudience\obj\Debug\net5.0\Razor\Views\User\AdminAudience.cshtml.g.cs
 C:\Users\Jogee\Desktop\BookRoom\BookingAudience\obj\Debug\net5.0\Razor\Views\User\AdminBuilding.cshtml.g.cs
 C:\Users\Jogee\Desktop\BookRoom\BookingAudience\obj\Debug\net5.0\Razor\Views\User\AdminPanel.cshtml.g.cs
 C:\Users\Jogee\Desktop\BookRoom\BookingAudience\obj\Debug\net5.0\Razor\Views\User\AdminUser.cshtml.g.cs
+C:\Dirs\My codes\ASP NET\GitHub\BookingAudience\BookingAudience\obj\Debug\net5.0\Razor\Views\User\AdminAudience.cshtml.g.cs
+C:\Dirs\My codes\ASP NET\GitHub\BookingAudience\BookingAudience\obj\Debug\net5.0\Razor\Views\User\AdminBuilding.cshtml.g.cs
+C:\Dirs\My codes\ASP NET\GitHub\BookingAudience\BookingAudience\obj\Debug\net5.0\Razor\Views\User\AdminPanel.cshtml.g.cs
+C:\Dirs\My codes\ASP NET\GitHub\BookingAudience\BookingAudience\obj\Debug\net5.0\Razor\Views\User\AdminUser.cshtml.g.cs
