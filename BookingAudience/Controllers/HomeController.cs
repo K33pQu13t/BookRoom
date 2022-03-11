@@ -21,13 +21,14 @@ namespace BookingAudience.Controllers
 
             var _audiencesRepository = (IGenericRepository<Audience>)provider.GetService(typeof(IGenericRepository<Audience>));
             var _buildingsRepository = (IGenericRepository<Building>)provider.GetService(typeof(IGenericRepository<Building>));
-            var a = new AudiencesManagementService(_audiencesRepository, _buildingsRepository);
         }
 
         public IActionResult Index()
         {
             //todo отладка
-            return RedirectToAction("Login", "Auth");
+            //return RedirectToAction("Login", "Auth");
+
+            return View();
         }
 
         public IActionResult Success()

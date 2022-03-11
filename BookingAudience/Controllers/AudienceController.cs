@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace BookingAudience.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class AudienceController : Controller
     {
         private readonly IHttpContextAccessor _context;
@@ -34,12 +34,30 @@ namespace BookingAudience.Controllers
             _audiencesManagementService = new AudiencesManagementService(_audiencesRepository, _buildingsRepository);
         }
 
+        public IActionResult Index()
+        {
+            return View();
+        }
+
         public IActionResult GetAudiences()
         {
             return View(new AllAudiencesViewModel() 
             { 
                 
             });
+        }
+
+        public async Task<IActionResult> AddBuilding(string title, string address, char codeLetter)
+        {
+            await _audiencesManagementService.PushBuildingAsync(new Building() { Title = title, Address = address, CodeLetter = codeLetter });
+            return View();
+        }
+
+        public async Task<IActionResult> AddAudience(int floor, int buildingId, int number)
+        {
+            var building = await _buildingsRepository.GetAsync(buildingId);
+            await _audiencesManagementService.PushAudienceAsync(new Audience() { Building = building, Floor = floor, Number = number });
+            return View();
         }
     }
 }
