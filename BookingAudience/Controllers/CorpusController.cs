@@ -6,6 +6,8 @@ using BookingAudience.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace BookingAudience.Controllers
@@ -31,9 +33,31 @@ namespace BookingAudience.Controllers
 
             _corpusManagementService = new CorpusManagementService(_audiencesRepository, _buildingsRepository);
 
-            var building = new Building() { Title = "Корпус Л", Address = "Где-то в Красноярске", CodeLetter = 'Л' };
-            //то что ниже расклонировать
-            _corpusManagementService.PushAudienceAsync(new Audience() { Building = building, Floor = 1, Number = 104 }).GetAwaiter().GetResult();
+            //todo отладка, моковые данные
+            var building1 = new Building() { Title = "Корпус Л", Address = "Где-то на левом", CodeLetter = 'Л' };
+            var building2 = new Building() { Title = "Корпус А", Address = "Где-то у ракеты", CodeLetter = 'А' };
+            _corpusManagementService.PushBuildingAsync(building1).GetAwaiter().GetResult();
+            _corpusManagementService.PushBuildingAsync(building2).GetAwaiter().GetResult();
+
+            _corpusManagementService.PushAudienceAsync(new Audience() { Building = building1, Floor = 1, Number = 104 }).GetAwaiter().GetResult();
+
+            _corpusManagementService.PushAudienceAsync(new Audience() { Building = building2, Floor = 4, Number = 408 }).GetAwaiter().GetResult();
+            _corpusManagementService.PushAudienceAsync(new Audience() { Building = building2, Floor = 1, Number = 104 }).GetAwaiter().GetResult();
+
+            _corpusManagementService.PushAudienceAsync(new Audience() { Building = building1, Floor = 3, Number = 311 }).GetAwaiter().GetResult();
+            _corpusManagementService.PushAudienceAsync(new Audience() { Building = building1, Floor = 1, Number = 107 }).GetAwaiter().GetResult();
+            _corpusManagementService.PushAudienceAsync(new Audience() { Building = building1, Floor = 3, Number = 333 }).GetAwaiter().GetResult();
+
+            _corpusManagementService.PushAudienceAsync(new Audience() { Building = building2, Floor = 3, Number = 322 }).GetAwaiter().GetResult();
+            _corpusManagementService.PushAudienceAsync(new Audience() { Building = building2, Floor = 1, Number = 117 }).GetAwaiter().GetResult();
+
+            _corpusManagementService.PushAudienceAsync(new Audience() { Building = building1, Floor = 2, Number = 205 }).GetAwaiter().GetResult();
+            _corpusManagementService.PushAudienceAsync(new Audience() { Building = building1, Floor = 1, Number = 128 }).GetAwaiter().GetResult();
+            _corpusManagementService.PushAudienceAsync(new Audience() { Building = building1, Floor = 2, Number = 213 }).GetAwaiter().GetResult();
+
+            _corpusManagementService.PushAudienceAsync(new Audience() { Building = building2, Floor = 4, Number = 408 }).GetAwaiter().GetResult();
+            _corpusManagementService.PushAudienceAsync(new Audience() { Building = building2, Floor = 3, Number = 310 }).GetAwaiter().GetResult();
+            _corpusManagementService.PushAudienceAsync(new Audience() { Building = building2, Floor = 2, Number = 201 }).GetAwaiter().GetResult();
         }
 
         public IActionResult Index()
@@ -41,13 +65,22 @@ namespace BookingAudience.Controllers
             return View();
         }
 
+        [Route("{controller}/Audiences")]
         public IActionResult GetAudiences()
         {
             var audiences = _corpusManagementService.GetAllAudiences();
+            audiences = audiences.OrderBy(a => a.Building.Title).ToList();
+            List<string> buildingTitles = audiences.Select(o => o.Building.Title).Distinct().ToList();
 
-            return View(new AllAudiencesViewModel()
+            List<List<Audience>> result = new List<List<Audience>>();
+            for (int i = 0; i < buildingTitles.Count; i++)
+            {
+                result.Add(audiences.Where(a => a.Building.Title == buildingTitles[i]).OrderBy(a => a.Floor).ToList());
+            }
+
+            return View("Audiences", new AllAudiencesViewModel()
             { 
-                
+                Audiences = result
             });
         }
 

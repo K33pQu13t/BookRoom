@@ -1,4 +1,3 @@
-C:\Dirs\My codes\ASP NET\GitHub\BookingAudience\BookingAudience\obj\Debug\net5.0\BookingAudience.csproj.AssemblyReference.cache
 C:\Dirs\My codes\ASP NET\GitHub\BookingAudience\BookingAudience\obj\Debug\net5.0\BookingAudience.GeneratedMSBuildEditorConfig.editorconfig
 C:\Dirs\My codes\ASP NET\GitHub\BookingAudience\BookingAudience\obj\Debug\net5.0\BookingAudience.AssemblyInfoInputs.cache
 C:\Dirs\My codes\ASP NET\GitHub\BookingAudience\BookingAudience\obj\Debug\net5.0\BookingAudience.AssemblyInfo.cs
@@ -361,7 +360,6 @@ C:\Dirs\My codes\ASP NET\GitHub\BookingAudience\BookingAudience\obj\Debug\net5.0
 C:\Dirs\My codes\ASP NET\GitHub\BookingAudience\BookingAudience\obj\Debug\net5.0\BookingAudience.pdb
 C:\Dirs\My codes\ASP NET\GitHub\BookingAudience\BookingAudience\obj\Debug\net5.0\BookingAudience.genruntimeconfig.cache
 C:\Dirs\My codes\ASP NET\GitHub\BookingAudience\BookingAudience\obj\Debug\net5.0\Razor\Views\Auth\Login.cshtml.g.cs
-C:\Dirs\My codes\ASP NET\GitHub\BookingAudience\BookingAudience\obj\Debug\net5.0\Razor\Views\Home\Audiences.cshtml.g.cs
 C:\Users\Jogee\Desktop\BookRoom\BookingAudience\bin\Debug\net5.0\appsettings.Development.json
 C:\Users\Jogee\Desktop\BookRoom\BookingAudience\bin\Debug\net5.0\appsettings.json
 C:\Users\Jogee\Desktop\BookRoom\BookingAudience\bin\Debug\net5.0\BookingAudience.StaticWebAssets.xml
@@ -736,3 +734,4 @@ C:\Dirs\My codes\ASP NET\GitHub\BookingAudience\BookingAudience\obj\Debug\net5.0
 C:\Dirs\My codes\ASP NET\GitHub\BookingAudience\BookingAudience\obj\Debug\net5.0\Razor\Views\User\AdminBuilding.cshtml.g.cs
 C:\Dirs\My codes\ASP NET\GitHub\BookingAudience\BookingAudience\obj\Debug\net5.0\Razor\Views\User\AdminPanel.cshtml.g.cs
 C:\Dirs\My codes\ASP NET\GitHub\BookingAudience\BookingAudience\obj\Debug\net5.0\Razor\Views\User\AdminUser.cshtml.g.cs
+C:\Dirs\My codes\ASP NET\GitHub\BookingAudience\BookingAudience\obj\Debug\net5.0\Razor\Views\Corpus\Audiences.cshtml.g.cs
