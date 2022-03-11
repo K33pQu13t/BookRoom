@@ -1,0 +1,20 @@
+﻿@using BookingAudience.ViewModels;
+@model RegisterViewModel
+
+@{
+    ViewData["Title"] = "Administrate";
+}
+
+<div class="category-content admin">
+    <div class="category-title">@ViewData["Title"]</div>
+    <div class="view-page">
+
+        <form class="admin-form" asp-controller="AuthoriseController" asp-action="Register"> <!-- PARTIAL -->
+            <span class="form-title">User</span>
+            <input type="text" value="" placeholder="Login" value="@Model.Email" asp-for="Email"/>
+            <input type="text" value="" placeholder="Password" value="@Model.Password" asp-for="Password"/>
+            <button type="submit">Create User</button>
+        </form>
+
+    </div>
+</div>

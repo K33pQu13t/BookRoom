@@ -1,0 +1,29 @@
+﻿@using BookingAudience.ViewModels;
+@model AudienceViewModel
+
+@{
+    ViewData["Title"] = "Administrate";
+}
+
+<div class="category-content admin">
+    <div class="category-title">@ViewData["Title"]</div>
+    <div class="view-page">
+
+        <form class="admin-form" asp-controller="Corpus" asp-action="AddAudience"> <!-- PARTIAL -->
+            <span class="form-title">Building</span>
+            <select class="filter" name="building">
+                <option value="" disabled selected hidden>Building</option>
+                <!-- TODO: генерить автоматом из зданий -->
+                <option value="l">Corp. L</option>
+                <option value="a">Corp. A</option>
+                <option value="e">Corp. E</option>
+                <option value="c">Corp. C</option>
+            </select>
+            <input type="text" value="" placeholder="Floor" asp-for="Floor"/>
+            <input type="text" value="" placeholder="Number" asp-for="Number"/>
+            <!-- TODO: доп аргументы -->
+            <button type="submit">Create Audience</button>
+        </form>
+
+    </div>
+</div>

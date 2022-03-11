@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace BookingAudience.Controllers
 {
-    public class AuthController : Controller
+    public class AuthoriseController : Controller
     {
         private readonly IHttpContextAccessor _context;
         private readonly UserManager<AppUser> _userManager;
@@ -25,7 +25,7 @@ namespace BookingAudience.Controllers
         private readonly UserAuthService _userAuthService;
         private readonly UserAdministratingService _userAdministratingService;
 
-        public AuthController(IHttpContextAccessor context,
+        public AuthoriseController(IHttpContextAccessor context,
             IServiceProvider provider,
             UserManager<AppUser> userManager,
             SignInManager<AppUser> signInManager)

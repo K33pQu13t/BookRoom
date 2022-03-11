@@ -1,0 +1,21 @@
+﻿@using BookingAudience.ViewModels;
+@model BuildingViewModel
+
+@{
+    ViewData["Title"] = "Administrate";
+}
+
+<div class="category-content admin">
+    <div class="category-title">@ViewData["Title"]</div>
+    <div class="view-page">
+
+        <form class="admin-form" asp-controller="Corpus" asp-action="AddBuilding"> <!-- PARTIAL -->
+            <span class="form-title">Building</span>
+            <input type="text" value="@Model.Title" placeholder="Title" asp-for="Title"/>
+            <input type="text" value="@Model.Address" placeholder="Address" asp-for="Address"/>
+            <input type="text" value="@Model.CodeLetter" maxlength="1" placeholder="CodeLetter" asp-for="CodeLetter"/>
+            <button type="submit">Create Building</button>
+        </form>
+
+    </div>
+</div>

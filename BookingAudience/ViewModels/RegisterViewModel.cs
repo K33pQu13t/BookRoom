@@ -8,6 +8,7 @@ namespace BookingAudience.ViewModels
 {
     public class RegisterViewModel
     {
+        public string Email { get; set; }
         public string SecondName { get; set; }
         public string FirstName { get; set; }
         public Role UserRole { get; set; }
