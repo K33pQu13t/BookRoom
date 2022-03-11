@@ -75,6 +75,7 @@ namespace BookingAudience.Controllers
             //    return View(model);
             //}
 
+            model.UserRole = Role.Student;
             try
             {
                 await _userAdministratingService.RegisterAsync(
@@ -82,7 +83,7 @@ namespace BookingAudience.Controllers
                 {
                     UserRole = model.UserRole,
                     FirstName = model.FirstName,
-                    SecondName = model.SecondName,
+                    SecondName = model.LastName,
                     Password = model.Password
                 }, 
                 _userManager);

@@ -1,6 +1,10 @@
-﻿namespace BookingAudience.Views.User
-{
-    public class Admin
-    {
-    }
-}
+﻿<div class="category-content admin">
+    <div class="category-title">@ViewData["Title"]</div>
+    <div class="view-page">
+
+        @Html.PartialAsync("Adminb");
+        @Html.PartialAsync("Admina");
+        @Html.PartialAsync("Adminu");
+
+    </div>
+</div>
