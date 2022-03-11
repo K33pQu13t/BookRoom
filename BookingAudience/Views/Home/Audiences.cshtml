@@ -1,0 +1,184 @@
+﻿@{
+    ViewData["Title"] = "Audiences";
+}
+
+<div class="category-content audiences">
+    <div class="category-title">ViewData["Title"]</div>
+    <div class="controls">
+                    
+        <div>
+            <select class="filter" name="building">
+                <option value="" disabled selected hidden>Building filter</option>
+                @*TODO: все здания взять из бд*@
+                <option value="l">Corp. L</option>
+                <option value="a">Corp. A</option>
+                <option value="e">Corp. E</option>
+                <option value="c">Corp. C</option>
+            </select>
+        </div>
+                    
+        <div>
+            <select class="filter" name="floor">
+                <option value="" disabled selected hidden>Floor filter</option>
+                @*TODO: На основе выбранного здания сделать этажи*@
+                <!-- TODO: гинерить автоматичести в зависимости от этажей -->
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+            </select>
+        </div>
+                    
+        <div>
+            <select class="filter" name="advanced" multiple>
+                <option value="" disabled selected hidden>Advanced</option>
+                @*TODO: Фильтры общие, показывать их если выбран этаж*@
+                <!-- TODO: гинерить автоматичести  -->
+                <option value="1">Big</option>
+                <option value="2">Ne big</option>
+                <option value="3">smol</option>
+            </select>
+        </div>
+    </div>
+    <div class="view-page">
+
+        <div class="view-page-section" data-section-title="Building L">
+            <div class="view-page-title"><i class='bx bx-chevron-right icon' onClick={toggleNavigation}></i>Building L</div>
+
+            <div class="view-page-section" data-section-title="Building L">
+                <div class="view-page-title"><i class='bx bx-chevron-right icon' onClick={toggleNavigation}></i>Floor 3</div>
+                            
+                <a href="audience.html" class="service audience">
+                    <span class="title">L301</span>
+                    <span class="description">Corp. "L", floor 3</span>
+                </a>
+                <a href="audience.html" class="service audience">
+                    <span class="title">L302</span>
+                    <span class="description">Corp. "L", floor 3</span>
+                </a>
+                <a href="audience.html" class="service audience">
+                    <span class="title">L303</span>
+                    <span class="description">Corp. "L", floor 3</span>
+                </a>
+                <a href="audience.html" class="service audience">
+                    <span class="title">L304</span>
+                    <span class="description">Corp. "L", floor 3</span>
+                </a>
+                <a href="audience.html" class="service audience">
+                    <span class="title">L305</span>
+                    <span class="description">Corp. "L", floor 3</span>
+                </a>
+                <a href="audience.html" class="service audience">
+                    <span class="title">L306</span>
+                    <span class="description">Corp. "L", floor 3</span>
+                </a>
+                <a href="audience.html" class="service audience">
+                    <span class="title">L307</span>
+                    <span class="description">Corp. "L", floor 3</span>
+                </a>
+                <a href="audience.html" class="service audience">
+                    <span class="title">L308</span>
+                    <span class="description">Corp. "L", floor 3</span>
+                </a>
+                <a href="audience.html" class="service audience">
+                    <span class="title">L309</span>
+                    <span class="description">Corp. "L", floor 3</span>
+                </a>
+                <a href="audience.html" class="service audience">
+                    <span class="title">L310</span>
+                    <span class="description">Corp. "L", floor 3</span>
+                </a>
+                <a href="audience.html" class="service audience">
+                    <span class="title">L311</span>
+                    <span class="description">Corp. "L", floor 3</span>
+                </a>
+                <a href="audience.html" class="service audience">
+                    <span class="title">L312</span>
+                    <span class="description">Corp. "L", floor 3</span>
+                </a>
+                <a href="audience.html" class="service audience">
+                    <span class="title">L313</span>
+                    <span class="description">Corp. "L", floor 3</span>
+                </a>
+            </div>
+
+            <div class="view-page-section" data-section-title="Building L">
+                <div class="view-page-title"><i class='bx bx-chevron-right icon' onClick={toggleNavigation}></i>Floor 4</div>
+                            
+                <a href="audience.html" class="service audience">
+                    <span class="title">L401</span>
+                    <span class="description">Corp. "L", floor 4</span>
+                </a>
+                <a href="audience.html" class="service audience">
+                    <span class="title">L402</span>
+                    <span class="description">Corp. "L", floor 4</span>
+                </a>
+                <a href="audience.html" class="service audience">
+                    <span class="title">L403</span>
+                    <span class="description">Corp. "L", floor 4</span>
+                </a>
+                <a href="audience.html" class="service audience">
+                    <span class="title">L404</span>
+                    <span class="description">Corp. "L", floor 4</span>
+                </a>
+                <a href="audience.html" class="service audience">
+                    <span class="title">L405</span>
+                    <span class="description">Corp. "L", floor 4</span>
+                </a>
+                <a href="audience.html" class="service audience">
+                    <span class="title">L406</span>
+                    <span class="description">Corp. "L", floor 4</span>
+                </a>
+                <a href="audience.html" class="service audience">
+                    <span class="title">L407</span>
+                    <span class="description">Corp. "L", floor 4</span>
+                </a>
+                            
+            </div>
+
+        </div>
+
+        <div class="view-page-section" data-section-title="Building L">
+            <div class="view-page-title"><i class='bx bx-chevron-right icon' onClick={toggleNavigation}></i>Building A</div>
+                        
+            <a href="audience.html" class="service audience">
+                <span class="title">A301</span>
+                <span class="description">Corp. "A", floor 3</span>
+            </a>
+            <a href="audience.html" class="service audience">
+                <span class="title">A302</span>
+                <span class="description">Corp. "A", floor 3</span>
+            </a>
+            <a href="audience.html" class="service audience">
+                <span class="title">A303</span>
+                <span class="description">Corp. "A", floor 3</span>
+            </a>
+            <a href="audience.html" class="service audience">
+                <span class="title">A304</span>
+                <span class="description">Corp. "A", floor 3</span>
+            </a>
+            <a href="audience.html" class="service audience">
+                <span class="title">A305</span>
+                <span class="description">Corp. "A", floor 3</span>
+            </a>
+            <a href="audience.html" class="service audience">
+                <span class="title">A306</span>
+                <span class="description">Corp. "A", floor 3</span>
+            </a>
+            <a href="audience.html" class="service audience">
+                <span class="title">A307</span>
+                <span class="description">Corp. "A", floor 3</span>
+            </a>
+                        
+        </div>
+
+    </div>
+</div>

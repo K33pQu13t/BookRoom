@@ -1,0 +1,31 @@
+﻿@using BookingAudience.ViewModels;
+@model LoginViewModel
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div id="root">
+    <div class="App">
+
+
+        <form class="login-form" asp-controller="Auth" asp-action="Login" method="post" asp-antiforgery="true">
+            <div class="error-box" style="display: none;">Test error any error wont u explain be better then garden</div>
+            @*<div class="logo">
+            <img src="../img/logo.svg" alt="">
+        </div>*@
+            <div class="user-data">
+                <input type="text" asp-for="Login" placeholder="Login" tabindex="1">
+                <input type="password" asp-for="Password" placeholder="Password" tabindex="2">
+                <label for="rememberMe" class="checkbox">
+                    <input type="checkbox" name="remember" id="rememberMe" checked={rememberMe}>Remember Me
+                </label>
+            </div>
+            <div class="error-message" asp-validation-summary="All"></div>
+            <button tabindex="3">Login</button>
+            <div class="bottom-info">Don’t have an account? <a>Sign Up</a></div>
+        </form>
+
+
+    </div>
+</div>

@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="Audience booking service" />
+    <title>@ViewData["Title"] - BookingAudience</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet" />
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet' />
+</head>
+<body class="dark"> @*TODO:Получить настройку темы у юзера, если нет - по дефолту черная (у body будет класс dark) / или белая?*@
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+
+    <div class="root">
+        <App role="main" class="App">
+            
+            @*TODO: добавить условие, что без логина не отображать*@
+            <nav class="sidebar">
+                <header>
+                    <div class="logo-container">
+                        <img class="logo" src="../img/logo.svg" alt="Logo" />
+                        <span class="title">TEMP</span>
+                    </div>
+                    <i class='bx bx-chevron-right toggle' onClick={toggleNavigation}></i>
+                </header>
+                <div class="menu-bar">
+                    <div class="menu">
+                
+                        <li class="search-box">
+                            <i class='bx bx-search icon'></i>
+                            <input type="text" placeholder="Search..." /> @*TODO:*@
+                        </li>
+                
+                        <ul class="menu-links">
+                            <li class="nav-link">
+                                <a to="/dashboard" href="dashboard.html">
+                                <i class='bx bx-home-alt icon'></i>
+                                <span class="text nav-text">Dashboard</span>
+                                </a>
+                            </li>
+                
+                            <li class="nav-link">
+                                <a to="/audiences" href="audiences.html">
+                                <i class='bx bxs-door-open icon'></i>
+                                <span class="text nav-text">Audiences</span>
+                                </a>
+                            </li>
+                
+                            <li class="nav-link">
+                                <a to="/favorites" href="favorites.html">
+                                <i class='bx bx-star icon'></i>
+                                <span class="text nav-text">Favorites</span>
+                                </a>
+                            </li>
+
+                            <li class="nav-link">
+                                <a to="/map" href="dashboard.html">
+                                    <i class='bx bx-map icon'></i>
+                                    <span class="text nav-text">Map</span>
+                                </a>
+                            </li>
+
+                            <li class="nav-link">
+                                <a to="/user">
+                                <i class='bx bx-user icon'></i>
+                                <span class="text nav-text">Profile</span>
+                                </a>
+                            </li>
+                
+                        </ul>
+                    </div>
+                
+                    <div class="bottom-content">
+                        <li class="mode">
+                            <div class="sun-moon">
+                                <i class='bx bx-moon icon moon'></i>
+                                <i class='bx bx-sun icon sun'></i>
+                            </div>
+                            <span class="mode-text text">Dark mode</span>
+                            <div class="toggle-switch">
+                                <span class="switch" onClick={toggleTheme}></span>
+                            </div>
+                        </li>
+                    </div>
+                </div>
+            </nav>
+            <section class="page">
+                @RenderBody()
+            </section>
+        </App>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
