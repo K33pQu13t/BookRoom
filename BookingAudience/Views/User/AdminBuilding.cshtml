@@ -1,10 +1,6 @@
 ﻿@using BookingAudience.ViewModels;
 @model BuildingViewModel
 
-@{
-    ViewData["Title"] = "Administrate";
-}
-
 <form class="admin-form" asp-controller="Corpus" asp-action="AddBuilding"> <!-- PARTIAL -->
     <span class="form-title">Building</span>
     <input type="text" value="@Model.Title" placeholder="Title" asp-for="Title"/>

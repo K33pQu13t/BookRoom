@@ -16,9 +16,10 @@
     <div class="root">
         <App role="main" class="App">
             
-            @*TODO: добавить условие, что без логина не отображать*@
-            <nav class="sidebar">
-                <header>
+            @if (true) @* User.Identity.IsAuthenticated *@
+            {
+                <nav class="sidebar">
+                    <header>
                     <div class="logo-container">
                         <img class="logo" src="../img/logo.svg" alt="Logo" />
                         <span class="title">TEMP</span>
@@ -63,7 +64,7 @@
                             </li>
 
                             <li class="nav-link">
-                                <a asp-controller="User" asp-action="Index">
+                                <a asp-controller="User" asp-action="AdminPanel">
                                     <i class='bx bxs-terminal icon'></i>
                                     <span class="text nav-text">Administrate</span>
                                 </a>
@@ -93,6 +94,7 @@
                     </div>
                 </div>
             </nav>
+            }
             <section class="page">
                 @RenderBody()
             </section>

@@ -1,0 +1,14 @@
+﻿@{
+    ViewData["Title"] = "Administrate";
+}
+
+<div class="category-content admin">
+    <div class="category-title">@ViewData["Title"]</div>
+    <div class="view-page">
+
+        @await Html.PartialAsync("AdminBuilding");
+        @await Html.PartialAsync("AdminAudience");
+        @await Html.PartialAsync("AdminUser");
+
+    </div>
+</div>

@@ -1,10 +1,6 @@
 ﻿@using BookingAudience.ViewModels;
 @model RegisterViewModel
 
-@{
-    ViewData["Title"] = "Administrate";
-}
-
 <form class="admin-form" asp-controller="AuthoriseController" asp-action="Register"> <!-- PARTIAL -->
     <span class="form-title">User</span>
     <input type="text" placeholder="Login" value="@Model.Email" asp-for="Email"/>
