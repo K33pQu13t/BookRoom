@@ -15,7 +15,8 @@ namespace BookingAudience.ViewModels
         /// <summary>
         /// фамилия
         /// </summary>
-        public string SecondName { get; set; }
+        public string LastName { get; set; }
+        public string Email { get; set; }
         public DateTime BirthDay { get; set; }
     }
 }

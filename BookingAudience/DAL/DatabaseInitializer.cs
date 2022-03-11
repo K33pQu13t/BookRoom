@@ -20,7 +20,7 @@ namespace BookingAudience.DAL
             var tmpAdmin = new AppUser()
             {
                 FirstName = "Геннадий",
-                SecondName = "Букин",
+                LastName = "Букин",
                 UserRole = Role.Administrator,
                 Email = "adm@mail.ru",
                 UserName = "root"
