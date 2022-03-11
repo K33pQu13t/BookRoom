@@ -14,6 +14,7 @@ namespace BookingAudience.DAL
         public ApplicationDBContext(DbContextOptions<ApplicationDBContext> options)
            : base(options)
         {
+            Database.EnsureDeleted();
             Database.EnsureCreated();
         }
 
