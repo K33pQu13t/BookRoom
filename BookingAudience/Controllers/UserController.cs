@@ -1,6 +1,7 @@
 ﻿using BookingAudience.DAL.Repositories;
 using BookingAudience.Models.Users;
 using BookingAudience.Services.Users;
+using BookingAudience.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -41,21 +42,21 @@ namespace BookingAudience.Controllers
 
         public IActionResult AdminPanel()
         {
-            return View("Admin");
+            return View();
         }
 
         public IActionResult CreateBuilding()
         {
-            return View("Adminb");
+            return View("AdminBuilding", new BuildingViewModel());
         }
 
         public IActionResult CreateAudience()
         {
-            return View("Admina");
+            return View("AdminAudience", new AudienceViewModel());
         }
         public IActionResult CreateUser()
         {
-            return View("Admina");
+            return View("AdminUser", new UserViewModel());
         }
     }
 }

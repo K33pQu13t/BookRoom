@@ -361,7 +361,6 @@ C:\Dirs\My codes\ASP NET\GitHub\BookingAudience\BookingAudience\obj\Debug\net5.0
 C:\Dirs\My codes\ASP NET\GitHub\BookingAudience\BookingAudience\obj\Debug\net5.0\BookingAudience.pdb
 C:\Dirs\My codes\ASP NET\GitHub\BookingAudience\BookingAudience\obj\Debug\net5.0\BookingAudience.genruntimeconfig.cache
 C:\Dirs\My codes\ASP NET\GitHub\BookingAudience\BookingAudience\obj\Debug\net5.0\Razor\Views\Auth\Login.cshtml.g.cs
-C:\Dirs\My codes\ASP NET\GitHub\BookingAudience\BookingAudience\obj\Debug\net5.0\Razor\Views\Audience\Index.cshtml.g.cs
 C:\Dirs\My codes\ASP NET\GitHub\BookingAudience\BookingAudience\obj\Debug\net5.0\Razor\Views\Home\Audiences.cshtml.g.cs
 C:\Users\Jogee\Desktop\BookRoom\BookingAudience\bin\Debug\net5.0\appsettings.Development.json
 C:\Users\Jogee\Desktop\BookRoom\BookingAudience\bin\Debug\net5.0\appsettings.json
@@ -732,3 +731,8 @@ C:\Users\Jogee\Desktop\BookRoom\BookingAudience\obj\Debug\net5.0\refint\BookingA
 C:\Users\Jogee\Desktop\BookRoom\BookingAudience\obj\Debug\net5.0\BookingAudience.pdb
 C:\Users\Jogee\Desktop\BookRoom\BookingAudience\obj\Debug\net5.0\BookingAudience.genruntimeconfig.cache
 C:\Users\Jogee\Desktop\BookRoom\BookingAudience\obj\Debug\net5.0\ref\BookingAudience.dll
+C:\Dirs\My codes\ASP NET\GitHub\BookingAudience\BookingAudience\obj\Debug\net5.0\Razor\Views\Corpus\Index.cshtml.g.cs
+C:\Dirs\My codes\ASP NET\GitHub\BookingAudience\BookingAudience\obj\Debug\net5.0\Razor\Views\User\Admin.cshtml.g.cs
+C:\Dirs\My codes\ASP NET\GitHub\BookingAudience\BookingAudience\obj\Debug\net5.0\Razor\Views\User\Admina.cshtml.g.cs
+C:\Dirs\My codes\ASP NET\GitHub\BookingAudience\BookingAudience\obj\Debug\net5.0\Razor\Views\User\Adminb.cshtml.g.cs
+C:\Dirs\My codes\ASP NET\GitHub\BookingAudience\BookingAudience\obj\Debug\net5.0\Razor\Views\User\Adminu.cshtml.g.cs
