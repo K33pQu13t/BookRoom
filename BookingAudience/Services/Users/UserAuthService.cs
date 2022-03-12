@@ -34,14 +34,6 @@ namespace BookingAudience.Services.Users
             UserManager<AppUser> userManager,
             SignInManager<AppUser> signInManager)
         {
-            //User user = usersRepository.Get().FirstOrDefault(u =>
-            //    u.Email == loginInfo.Email &&
-            //    u.Password == loginInfo.Password);
-            //if (user == null)
-            //{
-            //    return false;
-            //}
-
             var user = await userManager.FindByEmailAsync(loginInfo.Email);
             if (user == null)
             {

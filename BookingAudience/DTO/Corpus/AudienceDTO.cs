@@ -8,7 +8,23 @@ namespace BookingAudience.DTO.Corpus
 {
     public class AudienceDTO
     {
-        public int Id { get; set; }
+        public AudienceDTO(Audience audience)
+        {
+            Id = audience.Id;
+            Building = audience.Building;
+            Description = audience.Description;
+            Floor = audience.Floor;
+            HasAudio = audience.HasAudio;
+            HasProjector = audience.HasProjector;
+            IsBlockedByAdmin = audience.IsBlockedByAdmin;
+            Number = audience.Number;
+            Title = audience.Title;
+            SeatPlaces = audience.SeatPlaces;
+            TablesCount = audience.TablesCount;
+            WorkComputersCount = audience.WorkComputersCount;
+        }
+
+        public int Id { get; }
         /// <summary>
         /// номер этажа
         /// </summary>

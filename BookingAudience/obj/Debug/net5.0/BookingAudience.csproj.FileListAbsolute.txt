@@ -738,3 +738,4 @@ C:\Dirs\My codes\ASP NET\GitHub\BookingAudience\BookingAudience\obj\Debug\net5.0
 C:\Users\Jogee\Desktop\BookRoom\BookingAudience\obj\Debug\net5.0\Razor\Views\Authorize\Login.cshtml.g.cs
 C:\Users\Jogee\Desktop\BookRoom\BookingAudience\obj\Debug\net5.0\Razor\Views\Corpus\Audience.cshtml.g.cs
 C:\Users\Jogee\Desktop\BookRoom\BookingAudience\obj\Debug\net5.0\Razor\Views\Corpus\Audiences.cshtml.g.cs
+C:\Dirs\My codes\ASP NET\GitHub\BookingAudience\BookingAudience\obj\Debug\net5.0\Razor\Views\Corpus\AudiencesFiltredPartial.cshtml.g.cs

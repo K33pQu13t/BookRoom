@@ -32,3 +32,23 @@ collapseSection.map((element) => { // TODO: переделать
 });
 
 function toggleViewSection() { };
+
+function updateAudiences() {
+    let b = document.getElementById("filter-building").value;
+    let buildingId = b.value;
+    let f = document.getElementById("filter-floor").value;
+    let floor = f.value;
+    let t = document.getElementById("filter-type").value;
+    let type = t.value;
+
+    $.ajax({
+        url: '/audiences',
+        data: { buildingId: buildingId, floor: floor, type: type },
+        success: function (response) {
+            $('#view-page').html(response);
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            alert(xhr.responseText);
+        }
+    });
+}

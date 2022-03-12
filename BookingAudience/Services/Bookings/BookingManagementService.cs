@@ -46,7 +46,7 @@ namespace BookingAudience.Services.Bookings
             endPossibleTime = new DateTime(hour: 19, minute: 0, second: 0, year: now.Year, month: now.Month, day: now.Day);
         }
 
-        public async Task BookAudienceAsync(IGenericRepository<BookingAudience.Models.Booking> bookingRepository, BookingAudience.Models.Booking booking)
+        public async Task BookAudienceAsync(IGenericRepository<Booking> bookingRepository, Booking booking)
         {
             if (booking.BookingTime >= DateTime.Now)
                 throw new Exception("Уже поздно бронировать на это время");
@@ -63,7 +63,7 @@ namespace BookingAudience.Services.Bookings
             await bookingRepository.CreateAsync(booking);
         }
 
-        public async Task UnbookAudience(IGenericRepository<Booking> bookingRepository, Booking booking)
+        public async Task UnbookAudienceAsync(IGenericRepository<Booking> bookingRepository, Booking booking)
         {
             if (booking.BookingTime >= DateTime.Now)
                 throw new Exception("Уже поздно отказаться от бронирования");
@@ -156,7 +156,5 @@ namespace BookingAudience.Services.Bookings
 
             return result;
         }
-
-      
     }
 }

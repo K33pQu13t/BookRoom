@@ -58,7 +58,7 @@ namespace BookingAudience.Services.Audiences
         /// Аудитории отсортированы по этажам и номерам кабинета
         /// </summary>
         /// <returns></returns>
-        public List<List<Audience>> GetAllAudiencesSortedByBuildingAndNumber()
+        public List<List<Audience>> GetAllAudiencesSortedByBuildingAndNumber(int buildingId = 0, int floor = 0)
         {
             //todo костыль разберись почему у некоторых билдинг становится null
             List<Audience> audiences = GetAllAudiences().Where(a => a.Building != null).ToList();
@@ -70,7 +70,11 @@ namespace BookingAudience.Services.Audiences
             List<List<Audience>> result = new List<List<Audience>>();
             for (int i = 0; i < buildingTitles.Count; i++)
             {
-                result.Add(audiences.Where(a => a.Building.Title == buildingTitles[i]).OrderBy(a => a.Floor).OrderBy(a => a.Number).ToList());
+                result.Add(audiences.Where(
+                    a => a.Building.Title == buildingTitles[i] && 
+                    (buildingId == 0 || buildingId == a.Building.Id) && 
+                    (floor == 0 || floor == a.Floor))
+                    .OrderBy(a => a.Floor).OrderBy(a => a.Number).ToList());
             }
             return result;
         }
@@ -84,7 +88,6 @@ namespace BookingAudience.Services.Audiences
         {
             Audience audience = new Audience()
             {
-                Id = audienceDTO.Id,
                 Building = audienceDTO.Building,
                 Description = audienceDTO.Description,
                 Floor = audienceDTO.Floor,
@@ -98,6 +101,17 @@ namespace BookingAudience.Services.Audiences
                 WorkComputersCount = audienceDTO.WorkComputersCount
             };
             _audiencesRepository.Update(audience);
+        }
+
+        public void EditBuilding(BuildingDTO buildingDTO)
+        {
+            Building building = new Building()
+            {
+                Address = buildingDTO.Address,
+                CodeLetter = buildingDTO.CodeLetter,
+                Title = buildingDTO.Title
+            };
+            _buildingsRepository.Update(building);
         }
     }
 }

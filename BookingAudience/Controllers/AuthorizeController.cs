@@ -81,7 +81,7 @@ namespace BookingAudience.Controllers
                 {
                     UserRole = model.UserRole,
                     FirstName = model.FirstName,
-                    SecondName = model.LastName,
+                    LastName = model.LastName,
                     Password = model.Password
                 }, 
                 _userManager);

@@ -125,7 +125,7 @@ namespace BookingAudience.Services.Users
             {
                 UserRole = registerInfo.UserRole,
                 FirstName = registerInfo.FirstName,
-                LastName = registerInfo.SecondName,
+                LastName = registerInfo.LastName,
             };
 
             var result = await userManager.CreateAsync(user, registerInfo.Password);
