@@ -3,8 +3,11 @@
 
 <form class="admin-form" asp-controller="Corpus" asp-action="AddAudience"> <!-- PARTIAL -->
     <span class="form-title">Audience</span>
+    <select class="filter" name="typeOptions" asp-items="Model.TypeOptions" asp-for="Type">
+        <option value="" disabled selected hidden>Тип аудитории</option>
+    </select>
     <select class="filter" name="buildingId"  asp-items="Model.BuildingOptions" asp-for="BuildingId">
-        <option value="" disabled selected hidden>Building</option>
+        <option value="" disabled selected hidden>Здание</option>
     </select>
     <input type="text" value="" placeholder="Этаж" asp-for="Floor"/>
     <input type="text" value="" placeholder="Номер" asp-for="Number"/>
@@ -24,6 +27,5 @@
     <input type="text" value="" placeholder="Число столов" asp-for="TablesCount"/>
     <input type="text" value="" placeholder="Сидячие места" asp-for="SeatPlaces"/>
     <input type="text" value="" placeholder="Число компьютеров" asp-for="WorkComputersCount"/>
-    <!-- TODO: доп аргументы -->
-    <button type="submit">Create Audience</button>
+    <button type="submit">Создать аудиторию</button>
 </form>

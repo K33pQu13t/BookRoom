@@ -11,6 +11,7 @@ namespace BookingAudience.ViewModels
     public class AudienceViewModel
     {
         public List<SelectListItem> BuildingOptions { get; set; }
+        public List<SelectListItem> TypeOptions { get; set; }
         public int Id { get; set; }
         /// <summary>
         /// номер этажа
