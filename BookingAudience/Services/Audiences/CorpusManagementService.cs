@@ -58,22 +58,29 @@ namespace BookingAudience.Services.Audiences
         /// Аудитории отсортированы по этажам и номерам кабинета
         /// </summary>
         /// <returns></returns>
-        public List<List<Audience>> GetAllAudiencesSortedByBuildingAndNumber(int buildingId = 0, int floor = 0)
+        public List<List<Audience>> GetAllAudiencesSortedByBuildingAndNumber(int buildingId = 0, int floor = 0, int type = 0)
         {
             //todo костыль разберись почему у некоторых билдинг становится null
             List<Audience> audiences = GetAllAudiences().Where(a => a.Building != null).ToList();
             if (audiences == null || audiences.Count == 0)
                 return null;
+
+            //сортировки
+            if (buildingId != 0)
+                audiences = audiences.Where(a => a.Building.Id == buildingId).ToList();
+            if (floor != 0)
+                audiences = audiences.Where(a => a.Floor == floor).ToList();
+            if (type != 0)
+                audiences = audiences.Where(a => (int)a.Type == type).ToList();
+
             audiences = audiences.OrderBy(a => a.Building.Title).ToList();
-            List<string> buildingTitles = audiences.Select(o => o.Building.Title).Distinct().ToList();
+            List<Building> buildings = audiences.Select(o => o.Building).Distinct().ToList();
 
             List<List<Audience>> result = new List<List<Audience>>();
-            for (int i = 0; i < buildingTitles.Count; i++)
+            for (int i = 0; i < buildings.Count; i++)
             {
                 result.Add(audiences.Where(
-                    a => a.Building.Title == buildingTitles[i] && 
-                    (buildingId == 0 || buildingId == a.Building.Id) && 
-                    (floor == 0 || floor == a.Floor))
+                    a => a.Building.Title == buildings[i].Title)
                     .OrderBy(a => a.Floor).OrderBy(a => a.Number).ToList());
             }
             return result;

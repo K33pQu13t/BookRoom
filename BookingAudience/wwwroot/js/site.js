@@ -34,15 +34,15 @@ collapseSection.map((element) => { // TODO: переделать
 function toggleViewSection() { };
 
 function updateAudiences() {
-    let b = document.getElementById("filter-building").value;
+    let b = document.getElementById("filter-building");
     let buildingId = b.value;
-    let f = document.getElementById("filter-floor").value;
+    let f = document.getElementById("filter-floor");
     let floor = f.value;
-    let t = document.getElementById("filter-type").value;
+    let t = document.getElementById("filter-type");
     let type = t.value;
 
     $.ajax({
-        url: '/audiences',
+        url: '/audiences/filtred',
         data: { buildingId: buildingId, floor: floor, type: type },
         success: function (response) {
             $('#view-page').html(response);

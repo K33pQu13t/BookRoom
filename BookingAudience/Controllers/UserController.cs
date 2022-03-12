@@ -41,6 +41,7 @@ namespace BookingAudience.Controllers
         }
 
         [Authorize(Policy = nameof(Role.Administrator))]
+        [Route("/admin")]
         public IActionResult AdminPanel()
         {
             return View();
