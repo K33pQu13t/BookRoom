@@ -748,7 +748,7 @@ section.page {
                     margin-right: 10px;
                 }
 
-            section.page .category-content.admin .view-page .admin-form > *:nth-last-child(3) {
+            section.page .category-content.admin .view-page .admin-form > .last {
                 margin-bottom: 15px;
             }
 

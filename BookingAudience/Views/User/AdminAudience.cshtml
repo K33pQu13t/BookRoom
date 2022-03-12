@@ -2,7 +2,7 @@
 @model AudienceViewModel
 
 <form class="admin-form" asp-controller="Corpus" asp-action="AddAudience"> <!-- PARTIAL -->
-    <span class="form-title">Audience</span>
+    <span class="form-title">Аудитория</span>
     <select class="filter" name="typeOptions" asp-items="Model.TypeOptions" asp-for="Type">
         <option value="" disabled selected hidden>Тип аудитории</option>
     </select>
@@ -26,6 +26,6 @@
     </label>
     <input type="text" value="" placeholder="Число столов" asp-for="TablesCount"/>
     <input type="text" value="" placeholder="Сидячие места" asp-for="SeatPlaces"/>
-    <input type="text" value="" placeholder="Число компьютеров" asp-for="WorkComputersCount"/>
+    <input class="last" type="text" value="" placeholder="Число компьютеров" asp-for="WorkComputersCount"/>
     <button type="submit">Создать аудиторию</button>
 </form>

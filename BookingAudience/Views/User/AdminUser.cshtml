@@ -2,12 +2,12 @@
 @model RegisterViewModel
 
 <form class="admin-form" asp-controller="AuthoriseController" asp-action="Register"> <!-- PARTIAL -->
-    <span class="form-title">User</span>
+    <span class="form-title">Пользователь</span>
     <input type="text" placeholder="Емаил" value="@Model.Email" asp-for="Email"/>
     <input type="text" placeholder="Имя" value="@Model.FirstName" asp-for="FirstName"/>
     <input type="text" placeholder="Фамилия" value="@Model.LastName" asp-for="LastName"/>
     <input type="text" placeholder="Пароль" value="@Model.Password" asp-for="Password"/>
-    <select class="filter" asp-items="Model.RoleOptions" asp-for="UserRole">
+    <select class="filter last" asp-items="Model.RoleOptions" asp-for="UserRole">
         <option disabled selected hidden>Роль пользователя</option>
     </select>
     <button type="submit">Создать пользователя</button>

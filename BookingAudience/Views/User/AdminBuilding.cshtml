@@ -2,9 +2,10 @@
 @model BuildingViewModel
 
 <form class="admin-form" asp-controller="Corpus" asp-action="AddBuilding"> <!-- PARTIAL -->
-    <span class="form-title">Building</span>
-    <input type="text" value="@Model.Title" placeholder="Title" asp-for="Title"/>
-    <input type="text" value="@Model.Address" placeholder="Address" asp-for="Address"/>
-    <input type="text" value="@Model.CodeLetter" maxlength="1" placeholder="CodeLetter" asp-for="CodeLetter"/>
+    <span class="form-title">Здание</span>
+    <input type="text" value="@Model.Title" placeholder="Название" asp-for="Title"/>
+    <input type="text" value="@Model.Address" placeholder="Адрес" asp-for="Address"/>
+    <input type="text" value="" maxlength="1" placeholder="Кодовая буква" asp-for="CodeLetter"/>
+    <input class="last" type="number" value="" placeholder="Максимальный этаж" asp-for="MaxFloor"/>
     <button type="submit">Create Building</button>
 </form>
