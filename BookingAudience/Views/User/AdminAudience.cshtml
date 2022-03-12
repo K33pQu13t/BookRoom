@@ -2,7 +2,7 @@
 @model AudienceViewModel
 
 <form class="admin-form" asp-controller="Corpus" asp-action="AddAudience"> <!-- PARTIAL -->
-    <span class="form-title">Building</span>
+    <span class="form-title">Audience</span>
     <select class="filter" name="building">
         <option value="" disabled selected hidden>Building</option>
         <!-- TODO: генерить автоматом из зданий -->
@@ -11,8 +11,24 @@
         <option value="e">Corp. E</option>
         <option value="c">Corp. C</option>
     </select>
-    <input type="text" value="" placeholder="Floor" asp-for="Floor"/>
-    <input type="text" value="" placeholder="Number" asp-for="Number"/>
+    <input type="text" value="" placeholder="Этаж" asp-for="Floor"/>
+    <input type="text" value="" placeholder="Номер" asp-for="Number"/>
+    <input type="text" value="" placeholder="Описание" asp-for="Description"/>
+    <label for="block" class="checkbox">
+        <input type="checkbox" id="block" value="" asp-for="IsBlockedByAdmin"/>
+        Заблокировано для аренды
+    </label>
+    <label for="projector" class="checkbox">
+        <input type="checkbox" id="projector" value="" asp-for="HasProjector"/>
+        Проектор
+    </label>
+    <label for="audio" class="checkbox">
+        <input type="checkbox" id="audio" value="" asp-for="HasAudio"/>
+        Аудио
+    </label>
+    <input type="text" value="" placeholder="Число столов" asp-for="TablesCount"/>
+    <input type="text" value="" placeholder="Сидячие места" asp-for="SeatPlaces"/>
+    <input type="text" value="" placeholder="Число компьютеров" asp-for="WorkComputersCount"/>
     <!-- TODO: доп аргументы -->
     <button type="submit">Create Audience</button>
 </form>
