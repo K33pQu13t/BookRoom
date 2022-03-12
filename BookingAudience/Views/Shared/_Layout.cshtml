@@ -16,16 +16,16 @@
     <div class="root">
         <App role="main" class="App">
             
-            @if (true) @* User.Identity.IsAuthenticated *@
+            @if (User.Identity.IsAuthenticated)
             {
                 <nav class="sidebar">
                     <header>
-                    <div class="logo-container">
-                        <img class="logo" src="../img/logo.svg" alt="Logo" />
-                        <span class="title">TEMP</span>
-                    </div>
-                    <i class='bx bx-chevron-right toggle' onClick={toggleNavigation}></i>
-                </header>
+                        <div class="logo-container">
+                            <img class="logo" src="../img/logo.svg" alt="Logo" />
+                            <span class="title">TEMP</span>
+                        </div>
+                        <i class='bx bx-chevron-right toggle' onClick={toggleNavigation}></i>
+                    </header>
                 <div class="menu-bar">
                     <div class="menu">
                 
@@ -43,7 +43,7 @@
                             </li>
                 
                             <li class="nav-link">
-                                <a asp-controller="Audience" asp-action="Index">
+                                <a asp-controller="Corpus" asp-action="GetAudiences">
                                 <i class='bx bxs-door-open icon'></i>
                                 <span class="text nav-text">Audiences</span>
                                 </a>
@@ -81,6 +81,8 @@
                     </div>
                 
                     <div class="bottom-content">
+
+                        @*  *@
                         <li class="mode">
                             <div class="sun-moon">
                                 <i class='bx bx-moon icon moon'></i>
