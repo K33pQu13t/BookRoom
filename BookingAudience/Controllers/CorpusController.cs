@@ -26,12 +26,12 @@ namespace BookingAudience.Controllers
         private readonly IGenericRepository<Building> _buildingsRepository;
         private readonly CorpusManagementService _corpusManagementService;
 
-        readonly List<SelectListItem> audienceTypes = new List<SelectListItem>()
-        {
-            new SelectListItem(AudienceType.ClassRoom.GetDescription(), ((int)AudienceType.ClassRoom).ToString()),
-            new SelectListItem(AudienceType.Audience.GetDescription(), ((int)AudienceType.Audience).ToString()),
-            new SelectListItem(AudienceType.AssemblyHall.GetDescription(), ((int)AudienceType.AssemblyHall).ToString())
-        };
+        //readonly List<SelectListItem> audienceTypes = new List<SelectListItem>()
+        //{
+        //    new SelectListItem(AudienceType.ClassRoom.GetDescription(), ((int)AudienceType.ClassRoom).ToString()),
+        //    new SelectListItem(AudienceType.Audience.GetDescription(), ((int)AudienceType.Audience).ToString()),
+        //    new SelectListItem(AudienceType.AssemblyHall.GetDescription(), ((int)AudienceType.AssemblyHall).ToString())
+        //};
 
         public CorpusController(IHttpContextAccessor context, IServiceProvider provider)
         {
@@ -53,64 +53,91 @@ namespace BookingAudience.Controllers
         [Route("/audiences")]
         public IActionResult GetAudiences()
         {
-            var result = _corpusManagementService.GetAllAudiencesSortedByBuildingAndNumber();
-            if (result == null)
-            {
-                return View("Audiences", new AllAudiencesViewModel());
-            }
-
-            List<SelectListItem> buildings = new List<SelectListItem>();
-            List<SelectListItem> floors = new List<SelectListItem>();
-
-            List<int> uniqueFloors = new List<int>();
-            for (int i = 0; i < result.Count; i++)
-            {
-                buildings.Add(new SelectListItem(result[i][0].Building.Title, result[i][0].Building.Id.ToString()));
-                uniqueFloors.AddRange(result[i].Select(x => x.Floor).ToList());
-            }
-            uniqueFloors = uniqueFloors.Distinct().ToList();
-
-            for (int i = 0; i < uniqueFloors.Count; i++)
-            {
-                floors.Add(new SelectListItem(uniqueFloors[i].ToString(), uniqueFloors[i].ToString()));
-            }
-
-            return View("Audiences", new AllAudiencesViewModel()
-            { 
-                ListOfListsOfAudiences = result,
-                Buildings = buildings,
-                Floors = floors,
-                AudienceTypes = audienceTypes
-            });
+            return View("Audiences", GetAllAudienceViewModel());
         }
 
-        [Route("/audiences/filtred")]
-        public IActionResult GetAudiencesFiltred(int buildingId = 0, int floor = 0, int type = 0)
+        [Route("/audiences/filtered")]
+        public IActionResult AudiencesUpdate(int buildingId = 0, int floor = 0, int type = 0)
         {
-            var result = _corpusManagementService.GetAllAudiencesSortedByBuildingAndNumber(buildingId, floor, type);
+            return PartialView("Audiences", GetAllAudienceViewModel(buildingId, floor, type));
+        }
 
-            List<SelectListItem> buildings = new List<SelectListItem>();
-            List<SelectListItem> floors = new List<SelectListItem>();
+        private AllAudiencesViewModel GetAllAudienceViewModel(int buildingId = 0, int floor = 0, int type = 0)
+        {
+
+            var result = _corpusManagementService.GetAllAudiencesSortedByBuildingAndNumber(buildingId, floor, type);
+            if (result == null)
+            {
+                return new AllAudiencesViewModel();
+            }
+
+            //получаем все билдинги
+            List<Building> buildingList = _corpusManagementService.GetAllBuildings();
+            List<SelectListItem> buildings = new List<SelectListItem>()
+            {
+                new SelectListItem("Здание", "0")
+            };
+            for (int i = 0; i < buildingList.Count; i++)
+            {
+                buildings.Add(new SelectListItem(buildingList[i].Title, buildingList[i].Id.ToString()));
+            }
+
+            List<SelectListItem> floors = new List<SelectListItem>()   
+            {
+                new SelectListItem("Этаж", "0")
+            };
+            List<SelectListItem> types = new List<SelectListItem>()
+            {
+                new SelectListItem("Тип помещения", "0")
+            };
 
             List<int> uniqueFloors = new List<int>();
+            List<AudienceType> uniqueTypes = new();
             for (int i = 0; i < result.Count; i++)
             {
-                buildings.Add(new SelectListItem(result[i][0].Building.Title, result[i][0].Building.Id.ToString()));
-                uniqueFloors.AddRange(result[i].Select(x => x.Floor).ToList());
+                //buildings.Add(new SelectListItem(result[i][0].Building.Title, result[i][0].Building.Id.ToString()));
+                uniqueFloors.AddRange(result[i].Select(x => x.Floor));
+                uniqueTypes.AddRange(result[i].Select(X => X.Type));
             }
             uniqueFloors = uniqueFloors.Distinct().ToList();
+            uniqueTypes = uniqueTypes.Distinct().ToList();
+
 
             for (int i = 0; i < uniqueFloors.Count; i++)
             {
                 floors.Add(new SelectListItem(uniqueFloors[i].ToString(), uniqueFloors[i].ToString()));
             }
-            return PartialView("AudiencesFiltredPartial", new AllAudiencesViewModel()
+            for (int i = 0; i < uniqueTypes.Count; i++)
+            {
+                types.Add(new SelectListItem(uniqueTypes[i].GetDescription(), ((int)uniqueFloors[i]).ToString()));
+            }
+
+            var b = buildings.FirstOrDefault(x => x.Value == buildingId.ToString());
+            if (b != null)
+            {
+                b.Selected = true;
+            }
+            var f = floors.FirstOrDefault(x => x.Value == floor.ToString());
+            if (f != null)
+            {
+                f.Selected = true;
+            }
+            var t = types.FirstOrDefault(x => x.Value == type.ToString());
+            if (t != null)
+            {
+                t.Selected = true;
+            }
+
+            return new AllAudiencesViewModel()
             {
                 ListOfListsOfAudiences = result,
-                Buildings = buildings,
-                Floors = floors,
-                AudienceTypes = audienceTypes
-            });
+                BuildingOptions = buildings,
+                FloorOptions = floors,
+                AudienceTypeOptions = types,
+                SelectedBuildingId = buildingId,
+                SelectedFloor = floor,
+                SelectedType = type
+            };
         }
 
         [Route("/audiences/{fullNumber}")]
@@ -126,13 +153,24 @@ namespace BookingAudience.Controllers
             var audience = _corpusManagementService.GetAllAudiences().FirstOrDefault(a => a.Building.CodeLetter.ToString().ToLower() == codeLetter.ToString() && a.Number == number);
             if (audience == null)
                 throw new Exception($"Аудитории \"{codeLetter}{number}\" не существует");
-            return View("Audience", new AudienceViewModel() { Building = audience.Building, Floor = audience.Floor, Number = audience.Number });
+            return View("Audience", 
+                new AudienceViewModel() 
+                { 
+                    Building = audience.Building, 
+                    Floor = audience.Floor, 
+                    Number = audience.Number 
+                });
         }
 
         public async Task<IActionResult> GetBuilding(int id)
         {
             var building = await _corpusManagementService.GetBuildingAsync(id);
-            return View("Audience", new BuildingViewModel() { Title = building.Title, Address = building.Address, CodeLetter = building.CodeLetter });
+            return View("Audience", new BuildingViewModel() 
+            { 
+                Title = building.Title, 
+                Address = building.Address, 
+                CodeLetter = building.CodeLetter,
+            });
         }
 
         public async Task<IActionResult> AddAudience(AudienceViewModel model)
@@ -146,7 +184,7 @@ namespace BookingAudience.Controllers
             {
                 Building = building, 
                 Floor = model.Floor, 
-                Type = model.Type,
+                Type = model.Type == 0 ? AudienceType.ClassRoom : model.Type,
                 Number = model.Number,
                 Title = model.Title,
                 Description = model.Description,
@@ -164,7 +202,7 @@ namespace BookingAudience.Controllers
         {
             if (!ModelState.IsValid)
             {
-
+                
             }
 
             //сделать букву маленькой
