@@ -77,7 +77,7 @@ namespace BookingAudience.Controllers
         }
 
         [Route("/audiences")]
-        public IActionResult GetAudiences(int buildingId = 0, int floor = 0)
+        public IActionResult GetAudiences(int buildingId = 0, int floor = 0, int type = 0)
         {
             var result = _corpusManagementService.GetAllAudiencesSortedByBuildingAndNumber(buildingId, floor);
 
