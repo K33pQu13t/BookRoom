@@ -39,6 +39,8 @@ namespace BookingAudience.Services.Audiences
 
         public async Task PushAudienceAsync(Audience audience)
         {
+            if (!string.IsNullOrEmpty(audience.Title))
+                audience.Number = -1;
             await _audiencesRepository.CreateAsync(audience);
         }
 
@@ -70,7 +72,7 @@ namespace BookingAudience.Services.Audiences
             if (floor != 0)
                 audiences = audiences.Where(a => a.Floor == floor).ToList();
             if (type != 0)
-                audiences = audiences.Where(a => (int)a.Type == type).ToList();
+                audiences = audiences.Where(a => (int)(a.Type) == type).ToList();
 
             audiences = audiences.OrderBy(a => a.Building.Title).ToList();
             List<Building> buildings = audiences.Select(o => o.Building).Distinct().ToList();

@@ -13,16 +13,16 @@ namespace BookingAudience.Enums
         /// малая комната проведения занятий
         /// </summary>
         [Description("Классная комната")]
-        ClassRoom,
+        ClassRoom = 1,
         /// <summary>
         /// большая комната проведения занятий
         /// </summary>
         [Description("Аудитория")]
-        Audience,
+        Audience = 2,
         /// <summary>
         /// актовый зал
         /// </summary>
         [Description("Актовый зал")]
-        AssemblyHall
+        AssemblyHall = 3
     }
 }

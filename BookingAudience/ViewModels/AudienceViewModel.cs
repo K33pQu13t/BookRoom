@@ -3,6 +3,7 @@ using BookingAudience.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -15,12 +16,15 @@ namespace BookingAudience.ViewModels
         /// <summary>
         /// номер этажа
         /// </summary>
+        [Required]
         public int Floor { get; set; }
+        [Required]
         public AudienceType Type { get; set; }
         /// <summary>
         /// строение
         /// </summary>
         private Building building;
+        [Required]
         public Building Building 
         {
             get

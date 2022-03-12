@@ -42,10 +42,10 @@ function updateAudiences() {
     let type = t.value;
 
     $.ajax({
-        url: '/audiences/filtred',
+        url: '/audiences/filtered',
         data: { buildingId: buildingId, floor: floor, type: type },
         success: function (response) {
-            $('#view-page').html(response);
+            $('#audiences').html(response);
         },
         error: function (xhr, ajaxOptions, thrownError) {
             alert(xhr.responseText);

@@ -1,68 +1,67 @@
 ﻿@using BookingAudience.ViewModels;
-@model AllAudiencesViewModel; 
+@model AllAudiencesViewModel;
 
 
 @{
     ViewData["Title"] = "Audiences";
- 
+    int floor = -1;
 }
 
-<div class="category-content audiences">
+<div class="category-content audiences" id="audiences">
     <div class="category-title">@ViewData["Title"]</div>
     <div class="controls">
-                    
+
         <div>
-            <!--<select class="filter" name="building">
-                <option value="" disabled selected hidden>Building filter</option>-->
-                @*TODO: все здания взять из бд*@
-                <!--<option value="l">Corp. L</option>
-                <option value="a">Corp. A</option>
-                <option value="e">Corp. E</option>
-                <option value="c">Corp. C</option>
-            </select>-->
-            <select class="filter" id="filter-building" asp-items="Model.Buildings" onchange="updateAudiences()">
-                <option value="0" selected>Здание</option>
+            <select class="filter" id="filter-building" asp-items="Model.BuildingOptions" onchange="updateAudiences()">
+                
             </select>
         </div>
-                    
+
         <div>
-            <!--<select class="filter" name="floor">
-                <option value="" disabled selected hidden>Floor filter</option>-->
-                @*TODO: На основе выбранного здания сделать этажи*@
-                <!-- TODO: гинерить автоматичести в зависимости от этажей -->
-                <!--<option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
-                <option value="11">11</option>
-                <option value="12">12</option>
-            </select>-->
-            <select class="filter" id="filter-floor" asp-items="Model.Floors" onchange="updateAudiences()">
-                <option value="0" selected>Этаж</option>
+            <select class="filter" id="filter-floor" asp-items="Model.FloorOptions" onchange="updateAudiences()">
+
             </select>
         </div>
-                    
+
         <div>
-            <!--<select class="filter" name="advanced" multiple>
-                <option value="" disabled selected hidden>Advanced</option>-->
-                @*TODO: Фильтры общие, показывать их если выбран этаж*@
-                <!-- TODO: гинерить автоматичести  -->
-                <!--<option value="1">Big</option>
-                <option value="2">Ne big</option>
-                <option value="3">smol</option>
-            </select>-->
-            <select class="filter" id="filter-type" asp-items="Model.AudienceTypes" onchange="updateAudiences()">
-                <option value="0" selected>Тип помещения</option>
+            <select class="filter" id="filter-type" asp-items="Model.AudienceTypeOptions" onchange="updateAudiences()">
+        
             </select>
         </div>
     </div>
     <div class="view-page" id="view-page">
-        @await Html.PartialAsync("AudiencesFiltredPartial", Model)
+        @if (Model.ListOfListsOfAudiences != null && Model.ListOfListsOfAudiences.Count > 0)
+        {
+            @for (int i = 0; i < Model.ListOfListsOfAudiences.Count; i++)
+            {
+                string title = Model.ListOfListsOfAudiences[i][0].Building.Title;
+                <div class="view-page-section" data-section-title="@title">
+                    <div class="view-page-title"><i class='bx bx-chevron-right icon' onClick={toggleNavigation}></i>@title</div>
+
+                    @for (int j = 0; j < Model.ListOfListsOfAudiences[i].Count;)
+                    {
+                        floor = Model.ListOfListsOfAudiences[i][j].Floor;
+                        <div class="view-page-section" data-section-title="@title">
+                            <div class="view-page-title"><i class='bx bx-chevron-right icon' onClick={toggleNavigation}></i>Этаж @floor</div>
+
+                            @while (floor == Model.ListOfListsOfAudiences[i][j].Floor)
+                            {
+                                <a asp-controller="Corpus" asp-action="GetAudience" asp-route-fullNumber="@($"{Model.ListOfListsOfAudiences[i][j].Building.CodeLetter}{Model.ListOfListsOfAudiences[i][j].Number}")" class="service audience">
+                                    <span class="title">@($"{Model.ListOfListsOfAudiences[i][j].Building.CodeLetter}{Model.ListOfListsOfAudiences[i][j].Number}")</span>
+                                    <span class="description">@Model.ListOfListsOfAudiences[i][j].Building.Title, этаж @floor</span>
+                                </a>
+                                j++;
+                                if (j >= Model.ListOfListsOfAudiences[i].Count)
+                                    break;
+                            }
+                        </div>
+                    }
+                </div>
+            }
+        }
+        else
+        {
+            <span>Нет элементов, удовлетворяющих условиям фильтра</span>
+        }
     </div>
 </div>

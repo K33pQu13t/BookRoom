@@ -1,7 +1,11 @@
 ﻿@using BookingAudience.ViewModels;
 @model BuildingViewModel
 
-<form class="admin-form" asp-controller="Corpus" asp-action="AddBuilding"> <!-- PARTIAL -->
+<form class="admin-form" asp-controller="Corpus" asp-action="AddBuilding"
+        data-ajax="true"
+        data-ajax-method="POST"
+        data-ajax-mode="replace"
+        data-ajax-update="admin-form">
     <span class="form-title">Building</span>
     <input type="text" value="@Model.Title" placeholder="Title" asp-for="Title"/>
     <input type="text" value="@Model.Address" placeholder="Address" asp-for="Address"/>

@@ -44,7 +44,7 @@ namespace BookingAudience.Models
         {
             get
             {
-                if (Number == -1)
+                if (Number != -1)
                 {
                     return $"{Building.CodeLetter}{Number}";
                 }
@@ -52,7 +52,8 @@ namespace BookingAudience.Models
             }
             set
             {
-                if (Number != -1)
+                //если нет номера то можно назвать
+                if (Number == -1)
                     title = value;
             } 
         }
