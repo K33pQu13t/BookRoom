@@ -11,13 +11,13 @@
         <option value="e">Corp. E</option>
         <option value="c">Corp. C</option>
     </select>
-    <input type="text" value="" placeholder="Floor" asp-for="Floor"/>
-    <input type="text" value="" placeholder="Number" asp-for="Number"/>
+    <input type="text" value="" placeholder="Этаж" asp-for="Floor"/>
+    <input type="text" value="" placeholder="Номер" asp-for="Number"/>
+    <input type="text" value="" placeholder="Описание" asp-for="Description"/>
     <label for="block" class="checkbox">
         <input type="checkbox" id="block" value="" asp-for="IsBlockedByAdmin"/>
         Заблокировано для аренды
     </label>
-    <input type="text" value="" placeholder="Описание" asp-for="Description"/>
     <label for="projector" class="checkbox">
         <input type="checkbox" id="projector" value="" asp-for="HasProjector"/>
         Проектор
