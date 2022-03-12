@@ -1,5 +1,6 @@
 ﻿using BookingAudience.DAL.Repositories;
 using BookingAudience.Enums;
+using BookingAudience.Models;
 using BookingAudience.Models.Users;
 using BookingAudience.Services.Users;
 using BookingAudience.ViewModels;
@@ -7,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +25,8 @@ namespace BookingAudience.Controllers
         private readonly UserManagementService _userManagerService;
         private readonly UserAuthService _userAuthService;
 
+        private readonly IGenericRepository<Building> _buildingRepository;
+
         public UserController(IHttpContextAccessor context,
             IServiceProvider provider,
             UserManager<AppUser> userManager,
@@ -38,13 +42,25 @@ namespace BookingAudience.Controllers
                 usersRepository,
                 _userAuthService,
                 userManager);
+
+            _buildingRepository = (IGenericRepository<Building>)provider.GetService(typeof(IGenericRepository<Building>));
         }
 
         [Authorize(Policy = nameof(Role.Administrator))]
         [Route("/admin")]
         public IActionResult AdminPanel()
         {
-            return View();
+            List<Building> buildings = _buildingRepository.Get().ToList();
+            List<SelectListItem> buildingsOptions = new();
+            for(int i = 0; i < buildings.Count; i++)
+            {
+                buildingsOptions.Add(new SelectListItem(buildings[i].Title, buildings[i].Id.ToString()));
+            }
+            return View(new AdminPanelViewModel() 
+            { 
+                Buildings = buildings,
+                BuildingsOptions = buildingsOptions
+            });
         }
 
         [Authorize(Policy = nameof(Role.Administrator))]

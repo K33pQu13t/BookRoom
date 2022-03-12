@@ -1,4 +1,6 @@
-﻿using BookingAudience.Models;
+﻿using BookingAudience.Enums;
+using BookingAudience.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,11 +10,13 @@ namespace BookingAudience.ViewModels
 {
     public class AudienceViewModel
     {
+        public List<SelectListItem> BuildingOptions { get; set; }
         public int Id { get; set; }
         /// <summary>
         /// номер этажа
         /// </summary>
         public int Floor { get; set; }
+        public AudienceType Type { get; set; }
         /// <summary>
         /// строение
         /// </summary>

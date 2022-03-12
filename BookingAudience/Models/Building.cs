@@ -20,5 +20,10 @@ namespace BookingAudience.Models
         /// кодовая буква, с помощью которой формируется номер кабинета (в А корпусе кабинеты аля А123)
         /// </summary>
         public char CodeLetter { get; set; }
+
+        /// <summary>
+        /// номер самого верхнего этажа
+        /// </summary>
+        public int MaxFloor { get; set; }
     }
 }

@@ -45,30 +45,30 @@ namespace BookingAudience.Controllers
             _corpusManagementService = new CorpusManagementService(_audiencesRepository, _buildingsRepository);
 
             //todo отладка, моковые данные
-            var building1 = new Building() { Title = "Корпус Л", Address = "Где-то на левом", CodeLetter = 'л' };
-            var building2 = new Building() { Title = "Корпус А", Address = "Где-то у ракеты", CodeLetter = 'а' };
-            _corpusManagementService.PushBuildingAsync(building1).GetAwaiter().GetResult();
-            _corpusManagementService.PushBuildingAsync(building2).GetAwaiter().GetResult();
+            //var building1 = new Building() { Title = "Корпус Л", Address = "Где-то на левом", CodeLetter = 'л' };
+            //var building2 = new Building() { Title = "Корпус А", Address = "Где-то у ракеты", CodeLetter = 'а' };
+            //_corpusManagementService.PushBuildingAsync(building1).GetAwaiter().GetResult();
+            //_corpusManagementService.PushBuildingAsync(building2).GetAwaiter().GetResult();
 
-            _corpusManagementService.PushAudienceAsync(new Audience() { Building = building1, Floor = 1, Number = 104 }).GetAwaiter().GetResult();
+            //_corpusManagementService.PushAudienceAsync(new Audience() { Building = building1, Floor = 1, Number = 104 }).GetAwaiter().GetResult();
 
-            _corpusManagementService.PushAudienceAsync(new Audience() { Building = building2, Floor = 4, Number = 408 }).GetAwaiter().GetResult();
-            _corpusManagementService.PushAudienceAsync(new Audience() { Building = building2, Floor = 1, Number = 104 }).GetAwaiter().GetResult();
+            //_corpusManagementService.PushAudienceAsync(new Audience() { Building = building2, Floor = 4, Number = 408 }).GetAwaiter().GetResult();
+            //_corpusManagementService.PushAudienceAsync(new Audience() { Building = building2, Floor = 1, Number = 104 }).GetAwaiter().GetResult();
 
-            _corpusManagementService.PushAudienceAsync(new Audience() { Building = building1, Floor = 3, Number = 311 }).GetAwaiter().GetResult();
-            _corpusManagementService.PushAudienceAsync(new Audience() { Building = building1, Floor = 1, Number = 107 }).GetAwaiter().GetResult();
-            _corpusManagementService.PushAudienceAsync(new Audience() { Building = building1, Floor = 3, Number = 333 }).GetAwaiter().GetResult();
+            //_corpusManagementService.PushAudienceAsync(new Audience() { Building = building1, Floor = 3, Number = 311 }).GetAwaiter().GetResult();
+            //_corpusManagementService.PushAudienceAsync(new Audience() { Building = building1, Floor = 1, Number = 107 }).GetAwaiter().GetResult();
+            //_corpusManagementService.PushAudienceAsync(new Audience() { Building = building1, Floor = 3, Number = 333 }).GetAwaiter().GetResult();
 
-            _corpusManagementService.PushAudienceAsync(new Audience() { Building = building2, Floor = 3, Number = 322 }).GetAwaiter().GetResult();
-            _corpusManagementService.PushAudienceAsync(new Audience() { Building = building2, Floor = 1, Number = 117 }).GetAwaiter().GetResult();
+            //_corpusManagementService.PushAudienceAsync(new Audience() { Building = building2, Floor = 3, Number = 322 }).GetAwaiter().GetResult();
+            //_corpusManagementService.PushAudienceAsync(new Audience() { Building = building2, Floor = 1, Number = 117 }).GetAwaiter().GetResult();
 
-            _corpusManagementService.PushAudienceAsync(new Audience() { Building = building1, Floor = 2, Number = 205 }).GetAwaiter().GetResult();
-            _corpusManagementService.PushAudienceAsync(new Audience() { Building = building1, Floor = 1, Number = 128 }).GetAwaiter().GetResult();
-            _corpusManagementService.PushAudienceAsync(new Audience() { Building = building1, Floor = 2, Number = 213 }).GetAwaiter().GetResult();
+            //_corpusManagementService.PushAudienceAsync(new Audience() { Building = building1, Floor = 2, Number = 205 }).GetAwaiter().GetResult();
+            //_corpusManagementService.PushAudienceAsync(new Audience() { Building = building1, Floor = 1, Number = 128 }).GetAwaiter().GetResult();
+            //_corpusManagementService.PushAudienceAsync(new Audience() { Building = building1, Floor = 2, Number = 213 }).GetAwaiter().GetResult();
 
-            _corpusManagementService.PushAudienceAsync(new Audience() { Building = building2, Floor = 4, Number = 408 }).GetAwaiter().GetResult();
-            _corpusManagementService.PushAudienceAsync(new Audience() { Building = building2, Floor = 3, Number = 310 }).GetAwaiter().GetResult();
-            _corpusManagementService.PushAudienceAsync(new Audience() { Building = building2, Floor = 2, Number = 201 }).GetAwaiter().GetResult();
+            //_corpusManagementService.PushAudienceAsync(new Audience() { Building = building2, Floor = 4, Number = 408 }).GetAwaiter().GetResult();
+            //_corpusManagementService.PushAudienceAsync(new Audience() { Building = building2, Floor = 3, Number = 310 }).GetAwaiter().GetResult();
+            //_corpusManagementService.PushAudienceAsync(new Audience() { Building = building2, Floor = 2, Number = 201 }).GetAwaiter().GetResult();
         }
 
         public IActionResult Index()
@@ -80,6 +80,10 @@ namespace BookingAudience.Controllers
         public IActionResult GetAudiences()
         {
             var result = _corpusManagementService.GetAllAudiencesSortedByBuildingAndNumber();
+            if (result == null)
+            {
+                return View("Audiences", new AllAudiencesViewModel());
+            }
 
             List<SelectListItem> buildings = new List<SelectListItem>();
             List<SelectListItem> floors = new List<SelectListItem>();
@@ -159,18 +163,45 @@ namespace BookingAudience.Controllers
             return View("Audience", new BuildingViewModel() { Title = building.Title, Address = building.Address, CodeLetter = building.CodeLetter });
         }
 
-        public async Task<IActionResult> AddAudience(int floor, int buildingId, int number)
+        public async Task<IActionResult> AddAudience(AudienceViewModel model)
         {
-            var building = await _buildingsRepository.GetAsync(buildingId);
-            await _corpusManagementService.PushAudienceAsync(new Audience() { Building = building, Floor = floor, Number = number });
+            var building = await _buildingsRepository.GetAsync(model.Id);
+            await _corpusManagementService.PushAudienceAsync(new Audience() 
+            {
+                Building = model.Building, 
+                Floor = model.Floor, 
+                Type = model.Type,
+                Number = model.Number,
+                Title = model.Title,
+                Description = model.Description,
+                HasAudio = model.HasAudio,
+                HasProjector = model.HasProjector,
+                TablesCount = model.TablesCount,
+                SeatPlaces = model.SeatPlaces,
+                WorkComputersCount = model.WorkComputersCount,
+                IsBlockedByAdmin = model.IsBlockedByAdmin
+            });
             return View();
         }
 
-        public async Task AddBuilding(string title, string address, char codeLetter)
+        public async Task<IActionResult> AddBuilding(BuildingViewModel model)
         {
+
             //сделать букву маленькой
-            codeLetter = codeLetter.ToString().ToLower().ToCharArray()[0];
-            await _corpusManagementService.PushBuildingAsync(new Building() { Title = title, Address = address, CodeLetter = codeLetter });
+            model.CodeLetter = model.CodeLetter.ToString().ToLower().ToCharArray()[0];
+            await _corpusManagementService.PushBuildingAsync(new Building() 
+            { 
+                Title = model.Title, 
+                Address = model.Address,
+                CodeLetter = model.CodeLetter
+            });
+            List<Building> buildings = _corpusManagementService.GetAllBuildings();
+            List<SelectListItem> buildingsOptions = new();
+            for (int i = 0; i < buildings.Count; i++)
+            {
+                buildingsOptions.Add(new SelectListItem(buildings[i].Title, buildings[i].Id.ToString()));
+            }
+            return RedirectToAction("AdminPanel", "User", new AdminPanelViewModel() { Buildings = buildings, BuildingsOptions = buildingsOptions});
         }
     }
 }

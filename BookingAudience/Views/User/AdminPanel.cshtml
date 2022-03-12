@@ -1,4 +1,5 @@
 ﻿@using BookingAudience.ViewModels;
+@model AdminPanelViewModel;
 
 @{
     ViewData["Title"] = "Administrate";
@@ -9,7 +10,7 @@
     <div class="view-page">
 
         @await Html.PartialAsync("AdminBuilding", new BuildingViewModel())
-        @await Html.PartialAsync("AdminAudience", new AudienceViewModel())
+        @await Html.PartialAsync("AdminAudience", new AudienceViewModel() { BuildingOptions = Model.BuildingsOptions})
         @await Html.PartialAsync("AdminUser", new RegisterViewModel())
 
     </div>

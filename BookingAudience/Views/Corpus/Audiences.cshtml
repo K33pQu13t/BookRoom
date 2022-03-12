@@ -21,7 +21,7 @@
                 <option value="c">Corp. C</option>
             </select>-->
             <select class="filter" id="filter-building" asp-items="Model.Buildings" onchange="updateAudiences()">
-                <option value="0">Здание</option>
+                <option value="0" selected>Здание</option>
             </select>
         </div>
                     
@@ -44,7 +44,7 @@
                 <option value="12">12</option>
             </select>-->
             <select class="filter" id="filter-floor" asp-items="Model.Floors" onchange="updateAudiences()">
-                <option value="0">Этаж</option>
+                <option value="0" selected>Этаж</option>
             </select>
         </div>
                     
@@ -58,7 +58,7 @@
                 <option value="3">smol</option>
             </select>-->
             <select class="filter" id="filter-type" asp-items="Model.AudienceTypes" onchange="updateAudiences()">
-                <option value="0">Тип помещения</option>
+                <option value="0" selected>Тип помещения</option>
             </select>
         </div>
     </div>
