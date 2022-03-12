@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BookingAudience.ViewModels
+namespace BookingAudience.DTO.Corpus
 {
-    public class AudienceViewModel
+    public class AudienceDTO
     {
         public int Id { get; set; }
         /// <summary>

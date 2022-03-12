@@ -1,4 +1,5 @@
 ﻿using BookingAudience.DAL.Repositories;
+using BookingAudience.DTO.Corpus;
 using BookingAudience.Models;
 using BookingAudience.Models.Users;
 using System;
@@ -59,7 +60,8 @@ namespace BookingAudience.Services.Audiences
         /// <returns></returns>
         public List<List<Audience>> GetAllAudiencesSortedByBuildingAndNumber()
         {
-            var audiences = GetAllAudiences();
+            //todo костыль разберись почему у некоторых билдинг становится null
+            List<Audience> audiences = GetAllAudiences().Where(a => a.Building != null).ToList();
             if (audiences == null || audiences.Count == 0)
                 return null;
             audiences = audiences.OrderBy(a => a.Building.Title).ToList();
@@ -76,6 +78,26 @@ namespace BookingAudience.Services.Audiences
         public List<Building> GetAllBuildings()
         {
             return _buildingsRepository.Get().ToList();
+        }
+
+        public void EditAudience(AudienceDTO audienceDTO)
+        {
+            Audience audience = new Audience()
+            {
+                Id = audienceDTO.Id,
+                Building = audienceDTO.Building,
+                Description = audienceDTO.Description,
+                Floor = audienceDTO.Floor,
+                HasAudio = audienceDTO.HasAudio,
+                HasProjector = audienceDTO.HasProjector,
+                IsBlockedByAdmin = audienceDTO.IsBlockedByAdmin,
+                Number = audienceDTO.Number,
+                Title = audienceDTO.Title,
+                SeatPlaces = audienceDTO.SeatPlaces,
+                TablesCount = audienceDTO.TablesCount,
+                WorkComputersCount = audienceDTO.WorkComputersCount
+            };
+            _audiencesRepository.Update(audience);
         }
     }
 }

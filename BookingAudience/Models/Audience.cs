@@ -36,7 +36,53 @@ namespace BookingAudience.Models
         /// номер кабинета. -1 если без номера
         /// </summary>
         public int Number { get; set; } = -1;
+
+        private string title;
+        public string Title 
+        {
+            get
+            {
+                if (Number == -1)
+                {
+                    return $"{Building.CodeLetter}{Number}";
+                }
+                return title;
+            }
+            set
+            {
+                if (Number != -1)
+                    title = value;
+            } 
+        }
+        /// <summary>
+        /// true если админ убрал возможность арендовать эту аудиторию (закрыта на ремонт или ещё что)
+        /// </summary>
+        public bool IsBlockedByAdmin { get; set; }
         //todo булевое поле IsCanBook - если false то нельзя букнуть, но не потому что её букнули, просто менеджер решил что нельзя, например там ремонт
+
+        public string Description { get; set; }
+
+        /// <summary>
+        /// true если в аудитории есть проектор
+        /// </summary>
+        public bool HasProjector { get; set; }
+
+        /// <summary>
+        /// true если аудитория имеет аудио-оснащение
+        /// </summary>
+        public bool HasAudio { get; set; }
+
+        public int TablesCount { get; set; }
+
+        /// <summary>
+        /// количество сидячих мест
+        /// </summary>
+        public int SeatPlaces { get; set; }
+
+        /// <summary>
+        /// количество компьютеров, за которые можно рассадить посетителей
+        /// </summary>
+        public int WorkComputersCount { get; set; }
 
     }
 }

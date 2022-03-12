@@ -61,11 +61,11 @@
 
                 @for (int j = 0; j < Model.ListOfListsOfAudiences[i].Count; )
                 {
-                    @(floor = Model.ListOfListsOfAudiences[i][j].Floor)
+                    floor = Model.ListOfListsOfAudiences[i][j].Floor;
                     <div class="view-page-section" data-section-title="@title">
                         <div class="view-page-title"><i class='bx bx-chevron-right icon' onClick={toggleNavigation}></i>Этаж @floor</div>
 
-                        @while(floor == Model.ListOfListsOfAudiences[i][j].Floor)
+                        @while (floor == Model.ListOfListsOfAudiences[i][j].Floor)
                         {
                             <a asp-controller="Corpus" asp-action="GetAudience" asp-route-fullNumber="@($"{Model.ListOfListsOfAudiences[i][j].Building.CodeLetter}{Model.ListOfListsOfAudiences[i][j].Number}")" class="service audience">
                                 <span class="title">@($"{Model.ListOfListsOfAudiences[i][j].Building.CodeLetter}{Model.ListOfListsOfAudiences[i][j].Number}")</span>
@@ -79,135 +79,5 @@
                 }
             </div>
         }
-        @*<div class="view-page-section" data-section-title="Building L">
-            <div class="view-page-title"><i class='bx bx-chevron-right icon' onClick={toggleNavigation}></i>Building L</div>
-
-            <div class="view-page-section" data-section-title="Building L">
-                <div class="view-page-title"><i class='bx bx-chevron-right icon' onClick={toggleNavigation}></i>Floor 3</div>
-                            
-                <a href="audience.html" class="service audience">
-                    <span class="title">L301</span>
-                    <span class="description">Corp. "L", floor 3</span>
-                </a>
-                <a href="audience.html" class="service audience">
-                    <span class="title">L302</span>
-                    <span class="description">Corp. "L", floor 3</span>
-                </a>
-                <a href="audience.html" class="service audience">
-                    <span class="title">L303</span>
-                    <span class="description">Corp. "L", floor 3</span>
-                </a>
-                <a href="audience.html" class="service audience">
-                    <span class="title">L304</span>
-                    <span class="description">Corp. "L", floor 3</span>
-                </a>
-                <a href="audience.html" class="service audience">
-                    <span class="title">L305</span>
-                    <span class="description">Corp. "L", floor 3</span>
-                </a>
-                <a href="audience.html" class="service audience">
-                    <span class="title">L306</span>
-                    <span class="description">Corp. "L", floor 3</span>
-                </a>
-                <a href="audience.html" class="service audience">
-                    <span class="title">L307</span>
-                    <span class="description">Corp. "L", floor 3</span>
-                </a>
-                <a href="audience.html" class="service audience">
-                    <span class="title">L308</span>
-                    <span class="description">Corp. "L", floor 3</span>
-                </a>
-                <a href="audience.html" class="service audience">
-                    <span class="title">L309</span>
-                    <span class="description">Corp. "L", floor 3</span>
-                </a>
-                <a href="audience.html" class="service audience">
-                    <span class="title">L310</span>
-                    <span class="description">Corp. "L", floor 3</span>
-                </a>
-                <a href="audience.html" class="service audience">
-                    <span class="title">L311</span>
-                    <span class="description">Corp. "L", floor 3</span>
-                </a>
-                <a href="audience.html" class="service audience">
-                    <span class="title">L312</span>
-                    <span class="description">Corp. "L", floor 3</span>
-                </a>
-                <a href="audience.html" class="service audience">
-                    <span class="title">L313</span>
-                    <span class="description">Corp. "L", floor 3</span>
-                </a>
-            </div>
-
-            <div class="view-page-section" data-section-title="Building L">
-                <div class="view-page-title"><i class='bx bx-chevron-right icon' onClick={toggleNavigation}></i>Floor 4</div>
-                            
-                <a href="audience.html" class="service audience">
-                    <span class="title">L401</span>
-                    <span class="description">Corp. "L", floor 4</span>
-                </a>
-                <a href="audience.html" class="service audience">
-                    <span class="title">L402</span>
-                    <span class="description">Corp. "L", floor 4</span>
-                </a>
-                <a href="audience.html" class="service audience">
-                    <span class="title">L403</span>
-                    <span class="description">Corp. "L", floor 4</span>
-                </a>
-                <a href="audience.html" class="service audience">
-                    <span class="title">L404</span>
-                    <span class="description">Corp. "L", floor 4</span>
-                </a>
-                <a href="audience.html" class="service audience">
-                    <span class="title">L405</span>
-                    <span class="description">Corp. "L", floor 4</span>
-                </a>
-                <a href="audience.html" class="service audience">
-                    <span class="title">L406</span>
-                    <span class="description">Corp. "L", floor 4</span>
-                </a>
-                <a href="audience.html" class="service audience">
-                    <span class="title">L407</span>
-                    <span class="description">Corp. "L", floor 4</span>
-                </a>
-                            
-            </div>
-
-        </div>
-
-        <div class="view-page-section" data-section-title="Building L">
-            <div class="view-page-title"><i class='bx bx-chevron-right icon' onClick={toggleNavigation}></i>Building A</div>
-                        
-            <a href="audience.html" class="service audience">
-                <span class="title">A301</span>
-                <span class="description">Corp. "A", floor 3</span>
-            </a>
-            <a href="audience.html" class="service audience">
-                <span class="title">A302</span>
-                <span class="description">Corp. "A", floor 3</span>
-            </a>
-            <a href="audience.html" class="service audience">
-                <span class="title">A303</span>
-                <span class="description">Corp. "A", floor 3</span>
-            </a>
-            <a href="audience.html" class="service audience">
-                <span class="title">A304</span>
-                <span class="description">Corp. "A", floor 3</span>
-            </a>
-            <a href="audience.html" class="service audience">
-                <span class="title">A305</span>
-                <span class="description">Corp. "A", floor 3</span>
-            </a>
-            <a href="audience.html" class="service audience">
-                <span class="title">A306</span>
-                <span class="description">Corp. "A", floor 3</span>
-            </a>
-            <a href="audience.html" class="service audience">
-                <span class="title">A307</span>
-                <span class="description">Corp. "A", floor 3</span>
-            </a>
-                        
-        </div>*@
-
     </div>
 </div>

@@ -15,6 +15,9 @@ namespace BookingAudience.DAL
            : base(options)
         {
             //Database.EnsureDeleted();
+            //Audiences.Local.Clear();
+            //Bookings.Local.Clear();
+            //Buildings.Local.Clear();
             Database.EnsureCreated();
         }
 

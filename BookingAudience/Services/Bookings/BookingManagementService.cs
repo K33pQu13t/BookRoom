@@ -1,4 +1,5 @@
 ﻿using BookingAudience.DAL.Repositories;
+using BookingAudience.DTO.Corpus;
 using BookingAudience.Extensions;
 using BookingAudience.Models;
 using BookingAudience.Models.Users;
@@ -155,5 +156,7 @@ namespace BookingAudience.Services.Bookings
 
             return result;
         }
+
+      
     }
 }

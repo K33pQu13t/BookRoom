@@ -16,7 +16,7 @@
     <div class="root">
         <App role="main" class="App">
             
-            @if (true) @* User.Identity.IsAuthenticated *@
+            @if (User.Identity.IsAuthenticated)
             {
                 <nav class="sidebar">
                     <header>
