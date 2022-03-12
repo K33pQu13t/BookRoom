@@ -77,9 +77,9 @@ namespace BookingAudience.Controllers
         }
 
         [Route("/audiences")]
-        public IActionResult GetAudiences(int buildingId = 0, int floor = 0, int type = 0)
+        public IActionResult GetAudiences()
         {
-            var result = _corpusManagementService.GetAllAudiencesSortedByBuildingAndNumber(buildingId, floor);
+            var result = _corpusManagementService.GetAllAudiencesSortedByBuildingAndNumber();
 
             List<SelectListItem> buildings = new List<SelectListItem>();
             List<SelectListItem> floors = new List<SelectListItem>();
@@ -105,6 +105,37 @@ namespace BookingAudience.Controllers
                 AudienceTypes = audienceTypes
             });
         }
+
+        [Route("/audiences/filtred")]
+        public IActionResult GetAudiencesFiltred(int buildingId = 0, int floor = 0, int type = 0)
+        {
+            var result = _corpusManagementService.GetAllAudiencesSortedByBuildingAndNumber(buildingId, floor, type);
+
+            List<SelectListItem> buildings = new List<SelectListItem>();
+            List<SelectListItem> floors = new List<SelectListItem>();
+
+            List<int> uniqueFloors = new List<int>();
+            for (int i = 0; i < result.Count; i++)
+            {
+                buildings.Add(new SelectListItem(result[i][0].Building.Title, result[i][0].Building.Id.ToString()));
+                uniqueFloors.AddRange(result[i].Select(x => x.Floor).ToList());
+            }
+            uniqueFloors = uniqueFloors.Distinct().ToList();
+
+            for (int i = 0; i < uniqueFloors.Count; i++)
+            {
+                floors.Add(new SelectListItem(uniqueFloors[i].ToString(), uniqueFloors[i].ToString()));
+            }
+            return PartialView("AudiencesFiltredPartial", new AllAudiencesViewModel()
+            {
+                ListOfListsOfAudiences = result,
+                Buildings = buildings,
+                Floors = floors,
+                AudienceTypes = audienceTypes
+            });
+        }
+
+
 
         [Route("/audiences/{fullNumber}")]
         public IActionResult GetAudience(string fullNumber)

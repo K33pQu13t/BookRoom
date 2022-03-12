@@ -1,5 +1,5 @@
 ﻿@using BookingAudience.ViewModels;
-@model AllAudiencesViewModel; 
+@model AllAudiencesViewModel;
 
 @{
     int floor = -1;
@@ -11,7 +11,7 @@
     <div class="view-page-section" data-section-title="@title">
         <div class="view-page-title"><i class='bx bx-chevron-right icon' onClick={toggleNavigation}></i>@title</div>
 
-        @for (int j = 0; j < Model.ListOfListsOfAudiences[i].Count; )
+        @for (int j = 0; j < Model.ListOfListsOfAudiences[i].Count;)
         {
             floor = Model.ListOfListsOfAudiences[i][j].Floor;
             <div class="view-page-section" data-section-title="@title">

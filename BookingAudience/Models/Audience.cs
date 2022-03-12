@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BookingAudience.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ namespace BookingAudience.Models
     {
         public int Id { get; set; }
         private int floor;
+        public AudienceType Type { get; set; }
         /// <summary>
         /// номер этажа
         /// </summary>
