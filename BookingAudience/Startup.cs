@@ -84,7 +84,7 @@ namespace BookingAudience
 
             services.ConfigureApplicationCookie(config =>
             {
-                config.LoginPath = "/User/Login";
+                config.LoginPath = "/login";
                 config.AccessDeniedPath = "/error";
             });
 

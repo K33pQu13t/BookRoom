@@ -54,7 +54,6 @@ namespace BookingAudience.Services.Users
                 false);
             if (!result.Succeeded)
             {
-                
                 throw new Exception("Неверный логин пароль");
             }
         }

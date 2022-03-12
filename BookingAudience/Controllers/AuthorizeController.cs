@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace BookingAudience.Controllers
 {
-    public class AuthoriseController : Controller
+    public class AuthorizeController : Controller
     {
         private readonly IHttpContextAccessor _context;
         private readonly UserManager<AppUser> _userManager;
@@ -24,7 +24,7 @@ namespace BookingAudience.Controllers
         private readonly UserManagementService _userManagmentService;
         private readonly UserAuthService _userAuthService;
 
-        public AuthoriseController(IHttpContextAccessor context,
+        public AuthorizeController(IHttpContextAccessor context,
             IServiceProvider provider,
             UserManager<AppUser> userManager,
             SignInManager<AppUser> signInManager)
@@ -95,14 +95,18 @@ namespace BookingAudience.Controllers
             }
         }
 
+        [Route("/login")]
         public IActionResult Login()
         {
+            if (User.Identity.IsAuthenticated)
+                return RedirectToAction("Index", "Home");
+
             return View();
         }
 
         [AllowAnonymous]
         [HttpPost]
-        public async Task<IActionResult> Login(LoginViewModel model)
+        public async Task<IActionResult> LoginPost(LoginViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -118,13 +122,27 @@ namespace BookingAudience.Controllers
                         Password = model.Password
                     },
                     _userManager, _signInManager);
-                return RedirectToAction("Success", "Home");
+                return RedirectToAction("Index", "Home");
             }
             catch (Exception ex)
             {
                 ModelState.AddModelError("", ex.Message);
-                return View(model);
+                return View("Login" ,model);
             }
         }
+
+        [Route("/logout")]
+        public async Task<IActionResult> Logout()
+        {
+            await _userAuthService.LogOutAsync(_signInManager);
+
+            return RedirectToAction("Login");
+            //return LocalRedirect("/Home/Index");
+        }
+
+        //private IActionResult SuccessLogin()
+        //{
+        //    return RedirectToAction("Index", "Home");
+        //}
     }
 }

@@ -9,7 +9,7 @@
     <div class="App">
 
 
-        <form class="login-form" asp-controller="Auth" asp-action="Login" method="post" asp-antiforgery="true">
+        <form class="login-form" asp-controller="Authorize" asp-action="LoginPost" method="post" asp-antiforgery="true">
             <div class="error-box" style="display: none;">Test error any error wont u explain be better then garden</div>
             @*<div class="logo">
             <img src="../img/logo.svg" alt="">
@@ -22,7 +22,7 @@
                 </label>
             </div>
             <div class="error-message" asp-validation-summary="All"></div>
-            <button tabindex="3">Login</button>
+            <button tabindex="3" type="submit">Login</button>
             <div class="bottom-info">Don’t have an account? <a>Sign Up</a></div>
         </form>
 

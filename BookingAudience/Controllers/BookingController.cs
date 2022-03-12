@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace BookingAudience.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class BookingController : Controller
     {
         private readonly IHttpContextAccessor _context;
