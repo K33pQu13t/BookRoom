@@ -1,6 +1,7 @@
 ﻿@using BookingAudience.ViewModels;
 @model AllAudiencesViewModel; 
 
+
 @{
     ViewData["Title"] = "Audiences";
     int floor = -1;
@@ -71,7 +72,7 @@
                                 <span class="title">@($"{Model.ListOfListsOfAudiences[i][j].Building.CodeLetter}{Model.ListOfListsOfAudiences[i][j].Number}")</span>
                                 <span class="description">@Model.ListOfListsOfAudiences[i][j].Building.Title, этаж @floor</span>
                             </a>
-                            j++;
+                            @(j++;)
                             if (j >= Model.ListOfListsOfAudiences[i].Count)
                                 break;
                         }

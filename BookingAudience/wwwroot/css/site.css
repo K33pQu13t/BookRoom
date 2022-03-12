@@ -22,7 +22,7 @@
     --accent-color: #2e69ea;
     --additional-color: #dbe7ff;
     --approve-color: #58cd91;
-    --reject-color: rgb(247, 144, 144);
+    --reject-color: #ffbbbb;
     --toggle-color: #888888;
     --shadow-box-light: 0 0px 10px 0 rgb(0 0 0 / 10%);
     --shadow-box-medium: 0 0px 10px 0 rgb(0 0 0 / 20%);
@@ -66,7 +66,7 @@ body {
         --accent-color: #2e69ea;
         --additional-color: #dbe7ff;
         --approve-color: #58cd91;
-        --reject-color: rgb(247, 144, 144);
+        --reject-color: #d25959;
         --toggle-color: #a2a2a2;
         --shadow-box-light: 0 0px 10px 0 rgb(0 0 0 / 10%);
         --shadow-box-medium: 0 0px 10px 0 rgb(0 0 0 / 20%);
@@ -624,14 +624,14 @@ section.page {
             }
 
                 section.page > .category-content .controls > div .filter {
-                    display: block;
-                    height: 40px;
-                    padding: 5px;
-                    border-radius: 6px;
                     color: var(--main-text-color);
                     background-color: var(--background-accent-color);
                     -webkit-box-shadow: var(--shadow-box-light);
                     box-shadow: var(--shadow-box-light);
+                    display: block;
+                    height: 40px;
+                    padding: 5px;
+                    border-radius: 6px;
                 }
 
             section.page > .category-content .controls > *:nth-child(n+2)::before {
@@ -711,15 +711,171 @@ section.page {
             }
 
             section.page .category-content.admin .view-page .admin-form select {
-                display: block;
-                height: 40px;
-                padding: 5px;
-                border-radius: 6px;
                 color: var(--main-text-color);
                 background-color: var(--background-accent-color);
                 -webkit-box-shadow: var(--shadow-box-light);
                 box-shadow: var(--shadow-box-light);
+                display: block;
+                height: 40px;
+                padding: 5px;
+                border-radius: 6px;
             }
+
+    section.page .category-content.audience {
+        padding: 0 15px;
+        display: block;
+    }
+
+        section.page .category-content.audience > * {
+            display: -webkit-inline-box;
+            display: -ms-inline-flexbox;
+            display: inline-flex;
+            color: var(--main-text-color);
+            background-color: var(--background-accent-color);
+            -webkit-box-shadow: var(--shadow-box-light);
+            box-shadow: var(--shadow-box-light);
+        }
+
+            section.page .category-content.audience > * > *:first-child {
+                margin-bottom: 5px;
+                padding-top: 10px;
+                font-size: 18px;
+                border-bottom: 2px solid var(--background-color-light);
+            }
+
+        section.page .category-content.audience .booking {
+            display: -webkit-inline-box;
+            display: -ms-inline-flexbox;
+            display: inline-flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            width: calc(100% - 30px - 205px - 30px);
+            min-width: 270px;
+            padding: 15px;
+            margin: 15px;
+            border-radius: 6px;
+        }
+
+            section.page .category-content.audience .booking .filter {
+                color: var(--main-text-color);
+                background-color: var(--background-accent-color);
+                -webkit-box-shadow: var(--shadow-box-light);
+                box-shadow: var(--shadow-box-light);
+                display: block;
+                height: 40px;
+                padding: 5px;
+                border-radius: 6px;
+                max-width: 175px;
+                height: unset;
+                display: unset;
+                font-size: 16px;
+                background-color: var(--background-color-light);
+                -webkit-box-shadow: unset;
+                box-shadow: unset;
+            }
+
+            section.page .category-content.audience .booking .booking-configurator {
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                -webkit-box-orient: vertical;
+                -webkit-box-direction: normal;
+                -ms-flex-direction: column;
+                flex-direction: column;
+                margin-top: 5px;
+            }
+
+                section.page .category-content.audience .booking .booking-configurator .booked {
+                    display: -webkit-box;
+                    display: -ms-flexbox;
+                    display: flex;
+                    -ms-flex-wrap: wrap;
+                    flex-wrap: wrap;
+                    font-size: 14px;
+                }
+
+                    section.page .category-content.audience .booking .booking-configurator .booked > span {
+                        margin: 5px;
+                        padding: 5px;
+                        border-radius: 6px;
+                        word-wrap: normal;
+                        background-color: var(--reject-color);
+                    }
+
+                section.page .category-content.audience .booking .booking-configurator form {
+                    -webkit-box-shadow: none;
+                    box-shadow: none;
+                }
+
+                    section.page .category-content.audience .booking .booking-configurator form > div {
+                        display: -webkit-box;
+                        display: -ms-flexbox;
+                        display: flex;
+                        -webkit-box-orient: horizontal;
+                        -webkit-box-direction: normal;
+                        -ms-flex-direction: row;
+                        flex-direction: row;
+                        -webkit-box-pack: center;
+                        -ms-flex-pack: center;
+                        justify-content: center;
+                        margin: 10px 0;
+                    }
+
+                    section.page .category-content.audience .booking .booking-configurator form .filter {
+                        display: -webkit-box;
+                        display: -ms-flexbox;
+                        display: flex;
+                        -webkit-box-flex: 1;
+                        -ms-flex: 1 1 auto;
+                        flex: 1 1 auto;
+                        margin: 0 15px;
+                    }
+
+                    section.page .category-content.audience .booking .booking-configurator form button {
+                        display: -webkit-box;
+                        display: -ms-flexbox;
+                        display: flex;
+                        -webkit-box-pack: center;
+                        -ms-flex-pack: center;
+                        justify-content: center;
+                        -webkit-box-align: center;
+                        -ms-flex-align: center;
+                        align-items: center;
+                        height: 40px;
+                        width: -webkit-max-content;
+                        width: -moz-max-content;
+                        width: max-content;
+                        font-size: 16px;
+                        padding: 7px 10px;
+                    }
+
+        section.page .category-content.audience .audience-detail {
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            width: 200px;
+            margin: 15px;
+            padding: 15px;
+            border-radius: 6px;
+        }
+
+            section.page .category-content.audience .audience-detail .attribute {
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                -webkit-box-orient: vertical;
+                -webkit-box-direction: normal;
+                -ms-flex-direction: column;
+                flex-direction: column;
+                padding: 5px 0;
+            }
+
+                section.page .category-content.audience .audience-detail .attribute::before {
+                    content: attr(data-attr-title);
+                }
 
 body {
     min-height: 100vh;
