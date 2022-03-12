@@ -2,13 +2,14 @@
 @model BuildingViewModel
 
 <form class="admin-form" asp-controller="Corpus" asp-action="AddBuilding"
-        data-ajax="true"
-        data-ajax-method="POST"
-        data-ajax-mode="replace"
-        data-ajax-update="admin-form">
-    <span class="form-title">Building</span>
-    <input type="text" value="@Model.Title" placeholder="Title" asp-for="Title"/>
-    <input type="text" value="@Model.Address" placeholder="Address" asp-for="Address"/>
-    <input type="text" value="@Model.CodeLetter" maxlength="1" placeholder="CodeLetter" asp-for="CodeLetter"/>
-    <button type="submit">Create Building</button>
+      data-ajax="true"
+      data-ajax-method="POST"
+      data-ajax-mode="replace"
+      data-ajax-update="admin-form">
+<span class="form-title">Здание</span>
+    <input type="text" value="@Model.Title" placeholder="Название" asp-for="Title" />
+    <input type="text" value="@Model.Address" placeholder="Адресс" asp-for="Address" />
+    <input type="text" value="" maxlength="1" placeholder="Кодовая буква" asp-for="CodeLetter" />
+    <input type="number" value="" placeholder="Максимум этажей" min="-2" asp-for="MaxFloor" />
+    <button type="submit">Создать здание</button>
 </form>
