@@ -23,5 +23,6 @@ namespace BookingAudience.ViewModels
         /// </summary>
         [Required]
         public char CodeLetter { get; set; }
+        public int MaxFloor { get; set; }
     }
 }
