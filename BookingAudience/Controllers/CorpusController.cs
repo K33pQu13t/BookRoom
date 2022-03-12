@@ -34,55 +34,31 @@ namespace BookingAudience.Controllers
 
             _corpusManagementService = new CorpusManagementService(_audiencesRepository, _buildingsRepository);
 
-<<<<<<< HEAD
-            var building = new Building() { Title = "Корпус Л", Address = "Где-то в Красноярске", CodeLetter = 'Л' };
-            //то что ниже расклонировать
-            _corpusManagementService.PushAudienceAsync(new Audience() { Building = building, Floor = 1, Number = 101 }).GetAwaiter().GetResult();
-            _corpusManagementService.PushAudienceAsync(new Audience() { Building = building, Floor = 1, Number = 102 }).GetAwaiter().GetResult();
-            _corpusManagementService.PushAudienceAsync(new Audience() { Building = building, Floor = 1, Number = 103 }).GetAwaiter().GetResult();
-            _corpusManagementService.PushAudienceAsync(new Audience() { Building = building, Floor = 1, Number = 104 }).GetAwaiter().GetResult();
-            _corpusManagementService.PushAudienceAsync(new Audience() { Building = building, Floor = 1, Number = 105 }).GetAwaiter().GetResult();
-            _corpusManagementService.PushAudienceAsync(new Audience() { Building = building, Floor = 1, Number = 106 }).GetAwaiter().GetResult();
-            _corpusManagementService.PushAudienceAsync(new Audience() { Building = building, Floor = 1, Number = 107 }).GetAwaiter().GetResult();
-            _corpusManagementService.PushAudienceAsync(new Audience() { Building = building, Floor = 1, Number = 108 }).GetAwaiter().GetResult();
-            _corpusManagementService.PushAudienceAsync(new Audience() { Building = building, Floor = 1, Number = 109 }).GetAwaiter().GetResult();
-            _corpusManagementService.PushAudienceAsync(new Audience() { Building = building, Floor = 1, Number = 110 }).GetAwaiter().GetResult();
-            _corpusManagementService.PushAudienceAsync(new Audience() { Building = building, Floor = 1, Number = 111 }).GetAwaiter().GetResult();
-            _corpusManagementService.PushAudienceAsync(new Audience() { Building = building, Floor = 1, Number = 112 }).GetAwaiter().GetResult();
-            _corpusManagementService.PushAudienceAsync(new Audience() { Building = building, Floor = 1, Number = 113 }).GetAwaiter().GetResult();
-            _corpusManagementService.PushAudienceAsync(new Audience() { Building = building, Floor = 1, Number = 114 }).GetAwaiter().GetResult();
-            _corpusManagementService.PushAudienceAsync(new Audience() { Building = building, Floor = 1, Number = 115 }).GetAwaiter().GetResult();
-            _corpusManagementService.PushAudienceAsync(new Audience() { Building = building, Floor = 1, Number = 116 }).GetAwaiter().GetResult();
-            _corpusManagementService.PushAudienceAsync(new Audience() { Building = building, Floor = 1, Number = 117 }).GetAwaiter().GetResult();
-            _corpusManagementService.PushAudienceAsync(new Audience() { Building = building, Floor = 1, Number = 118 }).GetAwaiter().GetResult();
-            _corpusManagementService.PushAudienceAsync(new Audience() { Building = building, Floor = 1, Number = 119 }).GetAwaiter().GetResult();
-=======
             //todo отладка, моковые данные
-            //var building1 = new Building() { Title = "Корпус Л", Address = "Где-то на левом", CodeLetter = 'л' };
-            //var building2 = new Building() { Title = "Корпус А", Address = "Где-то у ракеты", CodeLetter = 'а' };
-            //_corpusManagementService.PushBuildingAsync(building1).GetAwaiter().GetResult();
-            //_corpusManagementService.PushBuildingAsync(building2).GetAwaiter().GetResult();
+            var building1 = new Building() { Title = "Корпус Л", Address = "Где-то на левом", CodeLetter = 'л' };
+            var building2 = new Building() { Title = "Корпус А", Address = "Где-то у ракеты", CodeLetter = 'а' };
+            _corpusManagementService.PushBuildingAsync(building1).GetAwaiter().GetResult();
+            _corpusManagementService.PushBuildingAsync(building2).GetAwaiter().GetResult();
 
-            //_corpusManagementService.PushAudienceAsync(new Audience() { Building = building1, Floor = 1, Number = 104 }).GetAwaiter().GetResult();
+            _corpusManagementService.PushAudienceAsync(new Audience() { Building = building1, Floor = 1, Number = 104 }).GetAwaiter().GetResult();
 
-            //_corpusManagementService.PushAudienceAsync(new Audience() { Building = building2, Floor = 4, Number = 408 }).GetAwaiter().GetResult();
-            //_corpusManagementService.PushAudienceAsync(new Audience() { Building = building2, Floor = 1, Number = 104 }).GetAwaiter().GetResult();
+            _corpusManagementService.PushAudienceAsync(new Audience() { Building = building2, Floor = 4, Number = 408 }).GetAwaiter().GetResult();
+            _corpusManagementService.PushAudienceAsync(new Audience() { Building = building2, Floor = 1, Number = 104 }).GetAwaiter().GetResult();
 
-            //_corpusManagementService.PushAudienceAsync(new Audience() { Building = building1, Floor = 3, Number = 311 }).GetAwaiter().GetResult();
-            //_corpusManagementService.PushAudienceAsync(new Audience() { Building = building1, Floor = 1, Number = 107 }).GetAwaiter().GetResult();
-            //_corpusManagementService.PushAudienceAsync(new Audience() { Building = building1, Floor = 3, Number = 333 }).GetAwaiter().GetResult();
+            _corpusManagementService.PushAudienceAsync(new Audience() { Building = building1, Floor = 3, Number = 311 }).GetAwaiter().GetResult();
+            _corpusManagementService.PushAudienceAsync(new Audience() { Building = building1, Floor = 1, Number = 107 }).GetAwaiter().GetResult();
+            _corpusManagementService.PushAudienceAsync(new Audience() { Building = building1, Floor = 3, Number = 333 }).GetAwaiter().GetResult();
 
-            //_corpusManagementService.PushAudienceAsync(new Audience() { Building = building2, Floor = 3, Number = 322 }).GetAwaiter().GetResult();
-            //_corpusManagementService.PushAudienceAsync(new Audience() { Building = building2, Floor = 1, Number = 117 }).GetAwaiter().GetResult();
+            _corpusManagementService.PushAudienceAsync(new Audience() { Building = building2, Floor = 3, Number = 322 }).GetAwaiter().GetResult();
+            _corpusManagementService.PushAudienceAsync(new Audience() { Building = building2, Floor = 1, Number = 117 }).GetAwaiter().GetResult();
 
-            //_corpusManagementService.PushAudienceAsync(new Audience() { Building = building1, Floor = 2, Number = 205 }).GetAwaiter().GetResult();
-            //_corpusManagementService.PushAudienceAsync(new Audience() { Building = building1, Floor = 1, Number = 128 }).GetAwaiter().GetResult();
-            //_corpusManagementService.PushAudienceAsync(new Audience() { Building = building1, Floor = 2, Number = 213 }).GetAwaiter().GetResult();
+            _corpusManagementService.PushAudienceAsync(new Audience() { Building = building1, Floor = 2, Number = 205 }).GetAwaiter().GetResult();
+            _corpusManagementService.PushAudienceAsync(new Audience() { Building = building1, Floor = 1, Number = 128 }).GetAwaiter().GetResult();
+            _corpusManagementService.PushAudienceAsync(new Audience() { Building = building1, Floor = 2, Number = 213 }).GetAwaiter().GetResult();
 
-            //_corpusManagementService.PushAudienceAsync(new Audience() { Building = building2, Floor = 4, Number = 408 }).GetAwaiter().GetResult();
-            //_corpusManagementService.PushAudienceAsync(new Audience() { Building = building2, Floor = 3, Number = 310 }).GetAwaiter().GetResult();
-            //_corpusManagementService.PushAudienceAsync(new Audience() { Building = building2, Floor = 2, Number = 201 }).GetAwaiter().GetResult();
->>>>>>> 5cef51ba61da00bf53f82198b395f3f6d0f0b7a5
+            _corpusManagementService.PushAudienceAsync(new Audience() { Building = building2, Floor = 4, Number = 408 }).GetAwaiter().GetResult();
+            _corpusManagementService.PushAudienceAsync(new Audience() { Building = building2, Floor = 3, Number = 310 }).GetAwaiter().GetResult();
+            _corpusManagementService.PushAudienceAsync(new Audience() { Building = building2, Floor = 2, Number = 201 }).GetAwaiter().GetResult();
         }
 
         public IActionResult Index()
