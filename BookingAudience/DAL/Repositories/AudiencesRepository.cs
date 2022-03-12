@@ -49,17 +49,17 @@ namespace BookingAudience.DAL.Repositories
 
         public IEnumerable<Audience> Get()
         {
-            return context.Audiences;
+            return context.Audiences.Include(u => u.Building);
         }
 
         public Audience Get(int id)
         {
-            return context.Audiences.FirstOrDefault(u => u.Id == id);
+            return context.Audiences.Include(u => u.Building).FirstOrDefault(u => u.Id == id);
         }
 
         public async Task<Audience> GetAsync(int id)
         {
-            return await context.Audiences.FirstOrDefaultAsync(u => u.Id == id);
+            return await context.Audiences.Include(u => u.Building).FirstOrDefaultAsync(u => u.Id == id);
         }
 
         public void Update(Audience updatedItem)

@@ -3,7 +3,7 @@
 
 <form class="admin-form" asp-controller="Corpus" asp-action="AddAudience"> <!-- PARTIAL -->
     <span class="form-title">Audience</span>
-    <select class="filter" name="building"  asp-items="Model.BuildingOptions" asp-for="Building">
+    <select class="filter" name="buildingId"  asp-items="Model.BuildingOptions" asp-for="BuildingId">
         <option value="" disabled selected hidden>Building</option>
     </select>
     <input type="text" value="" placeholder="Этаж" asp-for="Floor"/>

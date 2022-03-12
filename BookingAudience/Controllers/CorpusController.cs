@@ -43,32 +43,6 @@ namespace BookingAudience.Controllers
             _buildingsRepository = (IGenericRepository<Building>)provider.GetService(typeof(IGenericRepository<Building>));
 
             _corpusManagementService = new CorpusManagementService(_audiencesRepository, _buildingsRepository);
-
-            //todo отладка, моковые данные
-            //var building1 = new Building() { Title = "Корпус Л", Address = "Где-то на левом", CodeLetter = 'л' };
-            //var building2 = new Building() { Title = "Корпус А", Address = "Где-то у ракеты", CodeLetter = 'а' };
-            //_corpusManagementService.PushBuildingAsync(building1).GetAwaiter().GetResult();
-            //_corpusManagementService.PushBuildingAsync(building2).GetAwaiter().GetResult();
-
-            //_corpusManagementService.PushAudienceAsync(new Audience() { Building = building1, Floor = 1, Number = 104 }).GetAwaiter().GetResult();
-
-            //_corpusManagementService.PushAudienceAsync(new Audience() { Building = building2, Floor = 4, Number = 408 }).GetAwaiter().GetResult();
-            //_corpusManagementService.PushAudienceAsync(new Audience() { Building = building2, Floor = 1, Number = 104 }).GetAwaiter().GetResult();
-
-            //_corpusManagementService.PushAudienceAsync(new Audience() { Building = building1, Floor = 3, Number = 311 }).GetAwaiter().GetResult();
-            //_corpusManagementService.PushAudienceAsync(new Audience() { Building = building1, Floor = 1, Number = 107 }).GetAwaiter().GetResult();
-            //_corpusManagementService.PushAudienceAsync(new Audience() { Building = building1, Floor = 3, Number = 333 }).GetAwaiter().GetResult();
-
-            //_corpusManagementService.PushAudienceAsync(new Audience() { Building = building2, Floor = 3, Number = 322 }).GetAwaiter().GetResult();
-            //_corpusManagementService.PushAudienceAsync(new Audience() { Building = building2, Floor = 1, Number = 117 }).GetAwaiter().GetResult();
-
-            //_corpusManagementService.PushAudienceAsync(new Audience() { Building = building1, Floor = 2, Number = 205 }).GetAwaiter().GetResult();
-            //_corpusManagementService.PushAudienceAsync(new Audience() { Building = building1, Floor = 1, Number = 128 }).GetAwaiter().GetResult();
-            //_corpusManagementService.PushAudienceAsync(new Audience() { Building = building1, Floor = 2, Number = 213 }).GetAwaiter().GetResult();
-
-            //_corpusManagementService.PushAudienceAsync(new Audience() { Building = building2, Floor = 4, Number = 408 }).GetAwaiter().GetResult();
-            //_corpusManagementService.PushAudienceAsync(new Audience() { Building = building2, Floor = 3, Number = 310 }).GetAwaiter().GetResult();
-            //_corpusManagementService.PushAudienceAsync(new Audience() { Building = building2, Floor = 2, Number = 201 }).GetAwaiter().GetResult();
         }
 
         public IActionResult Index()
@@ -139,8 +113,6 @@ namespace BookingAudience.Controllers
             });
         }
 
-
-
         [Route("/audiences/{fullNumber}")]
         public IActionResult GetAudience(string fullNumber)
         {
@@ -165,10 +137,14 @@ namespace BookingAudience.Controllers
 
         public async Task<IActionResult> AddAudience(AudienceViewModel model)
         {
-            var building = await _buildingsRepository.GetAsync(model.Id);
+            if (!ModelState.IsValid)
+            {
+
+            }
+            var building = await _buildingsRepository.GetAsync(model.BuildingId);
             await _corpusManagementService.PushAudienceAsync(new Audience() 
             {
-                Building = model.Building, 
+                Building = building, 
                 Floor = model.Floor, 
                 Type = model.Type,
                 Number = model.Number,
@@ -181,11 +157,15 @@ namespace BookingAudience.Controllers
                 WorkComputersCount = model.WorkComputersCount,
                 IsBlockedByAdmin = model.IsBlockedByAdmin
             });
-            return View();
+            return RedirectToAction("AdminPanel", "User");
         }
 
         public async Task<IActionResult> AddBuilding(BuildingViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+
+            }
 
             //сделать букву маленькой
             model.CodeLetter = model.CodeLetter.ToString().ToLower().ToCharArray()[0];

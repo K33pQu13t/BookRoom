@@ -60,8 +60,7 @@ namespace BookingAudience.Services.Audiences
         /// <returns></returns>
         public List<List<Audience>> GetAllAudiencesSortedByBuildingAndNumber(int buildingId = 0, int floor = 0, int type = 0)
         {
-            //todo костыль разберись почему у некоторых билдинг становится null
-            List<Audience> audiences = GetAllAudiences().Where(a => a.Building != null).ToList();
+            List<Audience> audiences = GetAllAudiences().ToList();
             if (audiences == null || audiences.Count == 0)
                 return null;
 

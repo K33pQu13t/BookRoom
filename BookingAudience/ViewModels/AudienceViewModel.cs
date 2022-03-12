@@ -20,8 +20,20 @@ namespace BookingAudience.ViewModels
         /// <summary>
         /// строение
         /// </summary>
-        //public string Building { get; set; }
-        public Building Building { get; set; }
+        private Building building;
+        public Building Building 
+        {
+            get
+            {
+                return building;
+            } 
+            set 
+            {
+                building = value;
+                BuildingId = building.Id;
+            } 
+        }
+        public int BuildingId { get; set; }
         /// <summary>
         /// номер кабинета. -1 если без номера
         /// </summary>
