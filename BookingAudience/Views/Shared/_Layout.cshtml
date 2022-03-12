@@ -95,11 +95,14 @@
                         </li>
                     </div>
                 </div>
-            </nav>
-            }
-            <section class="page">
+                </nav>
+                <section class="page">
+                    @RenderBody()
+                </section>
+            } else {
                 @RenderBody()
-            </section>
+            }
+
         </App>
     </div>
 
