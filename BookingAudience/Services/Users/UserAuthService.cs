@@ -54,12 +54,11 @@ namespace BookingAudience.Services.Users
                 false);
             if (!result.Succeeded)
             {
-                
                 throw new Exception("Неверный логин пароль");
             }
         }
 
-        public async Task LogOffAsync(SignInManager<AppUser> signInManager)
+        public async Task LogOutAsync(SignInManager<AppUser> signInManager)
         {
             await signInManager.SignOutAsync();
         }

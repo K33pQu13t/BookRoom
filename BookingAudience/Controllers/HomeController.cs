@@ -1,6 +1,7 @@
 ﻿using BookingAudience.DAL.Repositories;
 using BookingAudience.Models;
 using BookingAudience.Services.Audiences;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -23,18 +24,16 @@ namespace BookingAudience.Controllers
             var _buildingsRepository = (IGenericRepository<Building>)provider.GetService(typeof(IGenericRepository<Building>));
         }
 
+        [Authorize]
         public IActionResult Index()
         {
-            //todo отладка
-            //return RedirectToAction("Login", "Auth");
+            //if (!User.Identity.IsAuthenticated)
+            //    return RedirectToAction("Login", "Authorize");
 
             return View();
         }
 
-        public IActionResult Success()
-        {
-            return View("Index");
-        }
+        
 
         public IActionResult Privacy()
         {

@@ -39,8 +39,8 @@ namespace BookingAudience
 
             services.Configure<RouteOptions>(options =>
             {
-                //options.LowercaseUrls = true;
-                //options.LowercaseQueryStrings = true;
+                options.LowercaseUrls = true;
+                options.LowercaseQueryStrings = true;
                 options.AppendTrailingSlash = true;
             });
             services.AddHttpContextAccessor();
@@ -84,7 +84,7 @@ namespace BookingAudience
 
             services.ConfigureApplicationCookie(config =>
             {
-                config.LoginPath = "/User/Login";
+                config.LoginPath = "/login";
                 config.AccessDeniedPath = "/error";
             });
 

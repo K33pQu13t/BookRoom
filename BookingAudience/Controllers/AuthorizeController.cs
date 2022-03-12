@@ -15,17 +15,16 @@ using System.Threading.Tasks;
 
 namespace BookingAudience.Controllers
 {
-    public class AuthoriseController : Controller
+    public class AuthorizeController : Controller
     {
         private readonly IHttpContextAccessor _context;
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
 
-        private readonly UserManagementService _userManagerService;
+        private readonly UserManagementService _userManagmentService;
         private readonly UserAuthService _userAuthService;
-        private readonly UserAdministratingService _userAdministratingService;
 
-        public AuthoriseController(IHttpContextAccessor context,
+        public AuthorizeController(IHttpContextAccessor context,
             IServiceProvider provider,
             UserManager<AppUser> userManager,
             SignInManager<AppUser> signInManager)
@@ -36,11 +35,10 @@ namespace BookingAudience.Controllers
 
             var usersRepository = (IGenericRepository<AppUser>)provider.GetService(typeof(IGenericRepository<AppUser>));
             _userAuthService = new UserAuthService(context);
-            _userManagerService = new UserManagementService(
+            _userManagmentService = new UserManagementService(
                 usersRepository,
                 _userAuthService,
                 userManager);
-            _userAdministratingService = new UserAdministratingService(context);
         }
 
         public async Task<IActionResult> Index(int? userId = null)
@@ -51,7 +49,7 @@ namespace BookingAudience.Controllers
                 userId = int.Parse(RouteData.Values["id"].ToString());
             }
 
-            AppUser user = await _userManagerService.GetUserAsync(userId);
+            AppUser user = await _userManagmentService.GetUserAsync(userId);
             //ViewBag.UserList = await _userManagerService.GetUsersSelectListItemsForUserPageAsync(userId);
 
             return View("Index",
@@ -78,7 +76,7 @@ namespace BookingAudience.Controllers
             model.UserRole = Role.Student;
             try
             {
-                await _userAdministratingService.RegisterAsync(
+                await _userManagmentService.RegisterAsync(
                 new RegisterDTO()
                 {
                     UserRole = model.UserRole,
@@ -97,14 +95,18 @@ namespace BookingAudience.Controllers
             }
         }
 
+        [Route("/login")]
         public IActionResult Login()
         {
+            if (User.Identity.IsAuthenticated)
+                return RedirectToAction("Index", "Home");
+
             return View();
         }
 
         [AllowAnonymous]
         [HttpPost]
-        public async Task<IActionResult> Login(LoginViewModel model)
+        public async Task<IActionResult> LoginPost(LoginViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -120,13 +122,27 @@ namespace BookingAudience.Controllers
                         Password = model.Password
                     },
                     _userManager, _signInManager);
-                return RedirectToAction("Success", "Home");
+                return RedirectToAction("Index", "Home");
             }
             catch (Exception ex)
             {
                 ModelState.AddModelError("", ex.Message);
-                return View(model);
+                return View("Login" ,model);
             }
         }
+
+        [Route("/logout")]
+        public async Task<IActionResult> Logout()
+        {
+            await _userAuthService.LogOutAsync(_signInManager);
+
+            return RedirectToAction("Login");
+            //return LocalRedirect("/Home/Index");
+        }
+
+        //private IActionResult SuccessLogin()
+        //{
+        //    return RedirectToAction("Index", "Home");
+        //}
     }
 }
