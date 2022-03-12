@@ -4,6 +4,7 @@ using BookingAudience.Models.Users;
 using BookingAudience.Services.Bookings;
 using BookingAudience.Services.Users;
 using BookingAudience.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -14,6 +15,7 @@ using System.Threading.Tasks;
 
 namespace BookingAudience.Controllers
 {
+    //[Authorize]
     public class BookingController : Controller
     {
         private readonly IHttpContextAccessor _context;

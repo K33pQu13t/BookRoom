@@ -8,6 +8,9 @@ namespace BookingAudience.ViewModels
 {
     public class AllAudiencesViewModel
     {
-        public List<List<Audience>> Audiences { get; set; }
+        /// <summary>
+        /// список списков аудиторий. Каждый список аудиторий содержит аудитории только одного билдинга, и аудитории рассортированы там по этажам
+        /// </summary>
+        public List<List<Audience>> ListOfListsOfAudiences { get; set; }
     }
 }

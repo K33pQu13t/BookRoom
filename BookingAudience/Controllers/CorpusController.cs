@@ -34,8 +34,8 @@ namespace BookingAudience.Controllers
             _corpusManagementService = new CorpusManagementService(_audiencesRepository, _buildingsRepository);
 
             //todo отладка, моковые данные
-            var building1 = new Building() { Title = "Корпус Л", Address = "Где-то на левом", CodeLetter = 'Л' };
-            var building2 = new Building() { Title = "Корпус А", Address = "Где-то у ракеты", CodeLetter = 'А' };
+            var building1 = new Building() { Title = "Корпус Л", Address = "Где-то на левом", CodeLetter = 'л' };
+            var building2 = new Building() { Title = "Корпус А", Address = "Где-то у ракеты", CodeLetter = 'а' };
             _corpusManagementService.PushBuildingAsync(building1).GetAwaiter().GetResult();
             _corpusManagementService.PushBuildingAsync(building2).GetAwaiter().GetResult();
 
@@ -65,28 +65,30 @@ namespace BookingAudience.Controllers
             return View();
         }
 
-        [Route("{controller}/Audiences")]
+        [Route("/audiences")]
         public IActionResult GetAudiences()
         {
-            var audiences = _corpusManagementService.GetAllAudiences();
-            audiences = audiences.OrderBy(a => a.Building.Title).ToList();
-            List<string> buildingTitles = audiences.Select(o => o.Building.Title).Distinct().ToList();
-
-            List<List<Audience>> result = new List<List<Audience>>();
-            for (int i = 0; i < buildingTitles.Count; i++)
-            {
-                result.Add(audiences.Where(a => a.Building.Title == buildingTitles[i]).OrderBy(a => a.Floor).ToList());
-            }
+            var result = _corpusManagementService.GetAllAudiencesSortedByBuildingAndNumber();
 
             return View("Audiences", new AllAudiencesViewModel()
             { 
-                Audiences = result
+                ListOfListsOfAudiences = result
             });
         }
 
-        public async Task<IActionResult> GetAudience(int id)
+        [Route("/audiences/{fullNumber}")]
+        public IActionResult GetAudience(string fullNumber)
         {
-            var audience = await _corpusManagementService.GetAudienceAsync(id);
+            char codeLetter = fullNumber[0];
+            int number = 0;
+            if (!int.TryParse(fullNumber.Substring(1), out number))
+            {
+                throw new Exception("Неверный формат названия кабинета");
+            }
+
+            var audience = _corpusManagementService.GetAllAudiences().FirstOrDefault(a => a.Building.CodeLetter.ToString().ToLower() == codeLetter.ToString() && a.Number == number);
+            if (audience == null)
+                throw new Exception($"Аудитории \"{codeLetter}{number}\" не существует");
             return View("Audience", new AudienceViewModel() { Building = audience.Building, Floor = audience.Floor, Number = audience.Number });
         }
 
@@ -105,6 +107,8 @@ namespace BookingAudience.Controllers
 
         public async Task AddBuilding(string title, string address, char codeLetter)
         {
+            //сделать букву маленькой
+            codeLetter = codeLetter.ToString().ToLower().ToCharArray()[0];
             await _corpusManagementService.PushBuildingAsync(new Building() { Title = title, Address = address, CodeLetter = codeLetter });
         }
     }

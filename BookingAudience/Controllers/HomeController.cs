@@ -25,8 +25,8 @@ namespace BookingAudience.Controllers
 
         public IActionResult Index()
         {
-            //todo отладка
-            //return RedirectToAction("Login", "Auth");
+            //if(!User.Identity.IsAuthenticated)
+            //    return RedirectToAction("Login", "Auth");
 
             return View();
         }

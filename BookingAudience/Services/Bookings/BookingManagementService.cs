@@ -1,4 +1,5 @@
 ﻿using BookingAudience.DAL.Repositories;
+using BookingAudience.Extensions;
 using BookingAudience.Models;
 using BookingAudience.Models.Users;
 using BookingAudience.Services.Users;
@@ -19,6 +20,7 @@ namespace BookingAudience.Services.Bookings
 
         private readonly DateTime startPossibleTime;
         private readonly DateTime endPossibleTime;
+        private const int minimalStepInMinutes = 30;
 
         public int CurrentUserId
         {
@@ -37,38 +39,43 @@ namespace BookingAudience.Services.Bookings
             this.bookingRepository = bookingRepository;
             this.userAuthService = userAuthService;
             this.userManager = userManager;
+
+            DateTime now = DateTime.Now;
+            startPossibleTime = new DateTime(hour: 9, minute: 0, second: 0, year: now.Year, month: now.Month, day: now.Day);
+            endPossibleTime = new DateTime(hour: 19, minute: 0, second: 0, year: now.Year, month: now.Month, day: now.Day);
         }
 
         public async Task BookAudienceAsync(IGenericRepository<BookingAudience.Models.Booking> bookingRepository, BookingAudience.Models.Booking booking)
         {
             if (booking.BookingTime >= DateTime.Now)
                 throw new Exception("Уже поздно бронировать на это время");
+            if (booking.DurationInMinutes < minimalStepInMinutes)
+                throw new Exception($"Продолжительность бронирования должна быть больше {minimalStepInMinutes} минут");
             if (booking.BookingTime.Minute % 30 != 0)
-                throw new Exception("Продолжительность аренды должна быть кратна 30 минутам");
+                throw new Exception($"Продолжительность аренды должна быть кратна {minimalStepInMinutes} минутам");
             if (booking.Creator.Id != userAuthService.CurrentUserId)
                 throw new Exception("Бронировать аудитории можно только на своё имя");
-            if (booking.DurationInMinutes <= 0)
-                throw new Exception("Продолжительность бронирования должна быть больше 0");
+
 
             //todo проверять что эта аудиенция на это время никем не занята ещё
 
             await bookingRepository.CreateAsync(booking);
         }
 
-        public async Task UnbookAudience(IGenericRepository<BookingAudience.Models.Booking> bookingRepository, BookingAudience.Models.Booking booking)
+        public async Task UnbookAudience(IGenericRepository<Booking> bookingRepository, Booking booking)
         {
             if (booking.BookingTime >= DateTime.Now)
-                throw new Exception("Уже поздно отказаться от брони");
+                throw new Exception("Уже поздно отказаться от бронирования");
             await bookingRepository.DeleteAsync(booking.Id);
         }
 
-        public async Task<List<BookingAudience.Models.Booking>> GetCurrentUsersLastBooks()
+        public async Task<List<Booking>> GetCurrentUsersLastBooks()
         {
             AppUser currentUser = await usersRepository.GetAsync(userAuthService.CurrentUserId);
             return bookingRepository.Get().Where(b => DateTime.Now >= b.BookingTime && b.Creator.Id == currentUser.Id).ToList();
         }
 
-        public async Task<List<BookingAudience.Models.Booking>> GetCurrentUsersFutureBooks()
+        public async Task<List<Booking>> GetCurrentUsersFutureBooks()
         {
             AppUser currentUser = await usersRepository.GetAsync(userAuthService.CurrentUserId);
             return bookingRepository.Get().Where(b => DateTime.Now < b.BookingTime && b.Creator.Id == currentUser.Id).ToList();
@@ -79,35 +86,74 @@ namespace BookingAudience.Services.Bookings
         /// </summary>
         /// <param name="date"></param>
         /// <returns></returns>
-        public async Task<Dictionary<DateTime, bool>> GetTimeScale(Audience audience, DateTime date)
+        public Dictionary<DateTime, bool> GetTimeScale(Audience audience, DateTime date)
         {
             List<Booking> bookings = bookingRepository.Get().Where(b => b.BookedAudience.Id == audience.Id).ToList();
 
-            DateTime time = DateTime.Now;
-            if (time.Minute > 30)
+            DateTime timeNow = DateTime.Now;
+            date = new DateTime(hour: timeNow.Hour, minute: timeNow.Minute, second: timeNow.Second, 
+                year: date.Year, month: date.Month, day: date.Day);
+            //если берём на сегодняшнее число
+            if (date.Date == timeNow.Date)
             {
-                time = time.AddMinutes(-time.Minute);
+                //если сейчас время меньше чем нижний минимальный порог, то устанавливаем время на нижний порог этот
+                if (timeNow.TimeOfDay < startPossibleTime.TimeOfDay)
+                {
+                    date = new DateTime(hour: startPossibleTime.Hour, minute: startPossibleTime.Minute, second: startPossibleTime.Second, 
+                        year: date.Year, month: date.Month, day: date.Day);
+                }
+                //иначе если время входит до верхнего порога, подгоняем до ближайшего
+                else if (timeNow.TimeOfDay < endPossibleTime.TimeOfDay)
+                {
+                    if (timeNow.Minute > 30)
+                    {
+                        //округляем время до будущих 00 минут
+                        timeNow = timeNow.AddMinutes(-timeNow.Minute).AddHours(1);
+                    }
+                    else
+                    {
+                        timeNow = timeNow.AddMinutes(Math.Abs(30 - timeNow.Minute));
+                    }
+                    date = new DateTime(hour: timeNow.Hour, minute: timeNow.Minute, second: timeNow.Second,
+                        year: date.Year, month: date.Month, day: date.Day);
+                }
+                else
+                {
+                    throw new Exception("На это время нельзя арендовать помещение");
+                }
             }
             else
             {
-                time = time.AddMinutes(Math.Abs(30 - time.Minute));
+                timeNow = startPossibleTime;
+                date = new DateTime(hour: timeNow.Hour, minute: timeNow.Minute, second: timeNow.Second,
+                       year: date.Year, month: date.Month, day: date.Day);
             }
 
-            //проверка что начальное время в диапазоне
-            if (time.TimeOfDay.TotalSeconds > startPossibleTime.TimeOfDay.TotalSeconds ||
-                time.TimeOfDay.TotalSeconds < endPossibleTime.TimeOfDay.TotalSeconds)
-            {
-                throw new Exception("На это время нельзя арендовать помещение");
-            }
-
-            //todo проверить в рандже ли запрашиваемый диапазон
-            //todo щас добавить time в result
             Dictionary<DateTime, bool> result = new Dictionary<DateTime, bool>();
-            for (int i = 0; ; i++)
+
+            while (true)
             {
-                //todo тут докинуть 30 минут и проверить в ранже ли ещё
-                //result.Add()
+                bool canBookForThisTime = true;
+
+                if (date.TimeOfDay < endPossibleTime.TimeOfDay)
+                {
+                    //если текущая дата которую заносим в словарь имеет пересечения с любыми буками на эту комнату, то это время нельзя установить стартовым
+                    if (bookings.Any(b => date.IsInRange(b.BookingTime, b.BookingTime.AddMinutes(b.DurationInMinutes))))
+                    {
+                        canBookForThisTime = false;
+                    }
+                    result.Add(date, canBookForThisTime);
+                }
+                else
+                {
+                    break;
+                }
+
+                //смещаем дату на следующую точку
+                date = date.AddMinutes(minimalStepInMinutes);
             }
+
+            return result;
         }
     }
 }
