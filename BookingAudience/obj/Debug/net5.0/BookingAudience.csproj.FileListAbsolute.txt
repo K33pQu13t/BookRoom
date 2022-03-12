@@ -361,7 +361,6 @@ C:\Dirs\My codes\ASP NET\GitHub\BookingAudience\BookingAudience\obj\Debug\net5.0
 C:\Dirs\My codes\ASP NET\GitHub\BookingAudience\BookingAudience\obj\Debug\net5.0\BookingAudience.genruntimeconfig.cache
 C:\Users\Jogee\Desktop\BookRoom\BookingAudience\bin\Debug\net5.0\appsettings.Development.json
 C:\Users\Jogee\Desktop\BookRoom\BookingAudience\bin\Debug\net5.0\appsettings.json
-C:\Users\Jogee\Desktop\BookRoom\BookingAudience\bin\Debug\net5.0\BookingAudience.StaticWebAssets.xml
 C:\Users\Jogee\Desktop\BookRoom\BookingAudience\bin\Debug\net5.0\BookingAudience.exe
 C:\Users\Jogee\Desktop\BookRoom\BookingAudience\bin\Debug\net5.0\BookingAudience.deps.json
 C:\Users\Jogee\Desktop\BookRoom\BookingAudience\bin\Debug\net5.0\BookingAudience.runtimeconfig.json
@@ -739,3 +738,4 @@ C:\Users\Jogee\Desktop\BookRoom\BookingAudience\obj\Debug\net5.0\Razor\Views\Aut
 C:\Users\Jogee\Desktop\BookRoom\BookingAudience\obj\Debug\net5.0\Razor\Views\Corpus\Audience.cshtml.g.cs
 C:\Users\Jogee\Desktop\BookRoom\BookingAudience\obj\Debug\net5.0\Razor\Views\Corpus\Audiences.cshtml.g.cs
 C:\Dirs\My codes\ASP NET\GitHub\BookingAudience\BookingAudience\obj\Debug\net5.0\Razor\Views\Corpus\AudiencesFiltredPartial.cshtml.g.cs
+C:\Users\Jogee\Desktop\BookRoom\BookingAudience\obj\Debug\net5.0\Razor\Views\Corpus\AudiencesFiltredPartial.cshtml.g.cs
