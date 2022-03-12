@@ -334,6 +334,10 @@ body {
                 display: none;
             }
 
+            body nav.sidebar .menu-bar::-moz-scrollbar {
+                display: none;
+            }
+
             body nav.sidebar .menu-bar .mode {
                 border-radius: 6px;
                 background-color: var(--background-color-light);
