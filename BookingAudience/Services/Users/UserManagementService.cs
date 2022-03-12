@@ -7,6 +7,9 @@ using BookingAudience.DAL;
 using BookingAudience.Models.Users;
 using BookingAudience.DAL.Repositories;
 using BookingAudience.Enums;
+using BookingAudience.DTO.Users;
+using System.Security.Claims;
+using System;
 
 namespace BookingAudience.Services.Users
 {
@@ -103,6 +106,41 @@ namespace BookingAudience.Services.Users
                 return usersRepository.Get().ToList();
             else
                 return usersRepository.Get().Where(u => u.Id != userAuthService.CurrentUserId).ToList();
+        }
+
+        /// <summary>
+        /// регистрация пользователя в система
+        /// </summary>
+        /// <param name="registerInfo"></param>
+        /// <param name="errorMessage"></param>
+        /// <returns>true при успешной регистрации</returns>
+        public async Task RegisterAsync(RegisterDTO registerInfo, UserManager<AppUser> userManager)
+        {
+            //if (User.IsInRole(Role.Administrator.ToString()))
+            //{
+            //if (registerInfo.DateOfStartWorking.Date > DateTime.Now.Date)
+            //    throw new StartWorkingDayException();
+
+            var user = new AppUser()
+            {
+                UserRole = registerInfo.UserRole,
+                FirstName = registerInfo.FirstName,
+                LastName = registerInfo.SecondName,
+            };
+
+            var result = await userManager.CreateAsync(user, registerInfo.Password);
+            if (result.Succeeded)
+            {
+                await userManager.AddClaimAsync(
+                    user, new Claim(ClaimTypes.Role, registerInfo.UserRole.ToString()));
+            }
+            else
+            {
+                throw new Exception(string.Join(',', result.Errors));
+            }
+            //}
+            //else
+            //    throw new UserRoleException("регистрировать пользователей");
         }
 
         /// <summary>

@@ -1,5 +1,7 @@
 ﻿using BookingAudience.DAL.Repositories;
+using BookingAudience.Models;
 using BookingAudience.Models.Users;
+using BookingAudience.Services.Bookings;
 using BookingAudience.Services.Users;
 using BookingAudience.ViewModels;
 using Microsoft.AspNetCore.Http;
@@ -12,16 +14,19 @@ using System.Threading.Tasks;
 
 namespace BookingAudience.Controllers
 {
-    public class UserController : Controller
+    public class BookingController : Controller
     {
         private readonly IHttpContextAccessor _context;
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
 
-        private readonly UserManagementService _userManagerService;
+        private readonly UserManagementService _userManagmentService;
         private readonly UserAuthService _userAuthService;
+        private readonly BookingManagementService _bookingManagementService;
+        private readonly IGenericRepository<Booking> _bookingRepository;
 
-        public UserController(IHttpContextAccessor context,
+
+        public BookingController(IHttpContextAccessor context,
             IServiceProvider provider,
             UserManager<AppUser> userManager,
             SignInManager<AppUser> signInManager)
@@ -31,30 +36,26 @@ namespace BookingAudience.Controllers
             _signInManager = signInManager;
 
             var usersRepository = (IGenericRepository<AppUser>)provider.GetService(typeof(IGenericRepository<AppUser>));
+            _bookingRepository = (IGenericRepository<Booking>)provider.GetService(typeof(IGenericRepository<Booking>));
             _userAuthService = new UserAuthService(context);
-            _userManagerService = new UserManagementService(
+            _userManagmentService = new UserManagementService(
                 usersRepository,
                 _userAuthService,
                 userManager);
+            _bookingManagementService = new BookingManagementService(usersRepository, _bookingRepository, _userAuthService, userManager);
         }
 
-        public IActionResult AdminPanel()
+        public async Task<IActionResult> Book(BookingViewModel bookingViewModel)
         {
+            Booking booking = new Booking()
+            {
+                BookedAudience = bookingViewModel.BookedAudience,
+                BookingTime = bookingViewModel.BookingTime,
+                DurationInMinutes = bookingViewModel.DurationInMinutes,
+                Creator = bookingViewModel.Creator
+            };
+            await _bookingManagementService.BookAudienceAsync(_bookingRepository, booking);
             return View();
-        }
-
-        public IActionResult CreateBuilding()
-        {
-            return View("AdminBuilding", new BuildingViewModel());
-        }
-
-        public IActionResult CreateAudience()
-        {
-            return View("AdminAudience", new AudienceViewModel());
-        }
-        public IActionResult CreateUser()
-        {
-            return View("AdminUser", new UserViewModel());
         }
     }
 }

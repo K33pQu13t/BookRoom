@@ -59,7 +59,7 @@ namespace BookingAudience.Services.Users
             }
         }
 
-        public async Task LogOffAsync(SignInManager<AppUser> signInManager)
+        public async Task LogOutAsync(SignInManager<AppUser> signInManager)
         {
             await signInManager.SignOutAsync();
         }

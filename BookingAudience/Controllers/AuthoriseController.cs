@@ -21,9 +21,8 @@ namespace BookingAudience.Controllers
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
 
-        private readonly UserManagementService _userManagerService;
+        private readonly UserManagementService _userManagmentService;
         private readonly UserAuthService _userAuthService;
-        private readonly UserAdministratingService _userAdministratingService;
 
         public AuthoriseController(IHttpContextAccessor context,
             IServiceProvider provider,
@@ -36,11 +35,10 @@ namespace BookingAudience.Controllers
 
             var usersRepository = (IGenericRepository<AppUser>)provider.GetService(typeof(IGenericRepository<AppUser>));
             _userAuthService = new UserAuthService(context);
-            _userManagerService = new UserManagementService(
+            _userManagmentService = new UserManagementService(
                 usersRepository,
                 _userAuthService,
                 userManager);
-            _userAdministratingService = new UserAdministratingService(context);
         }
 
         public async Task<IActionResult> Index(int? userId = null)
@@ -51,7 +49,7 @@ namespace BookingAudience.Controllers
                 userId = int.Parse(RouteData.Values["id"].ToString());
             }
 
-            AppUser user = await _userManagerService.GetUserAsync(userId);
+            AppUser user = await _userManagmentService.GetUserAsync(userId);
             //ViewBag.UserList = await _userManagerService.GetUsersSelectListItemsForUserPageAsync(userId);
 
             return View("Index",
@@ -78,7 +76,7 @@ namespace BookingAudience.Controllers
             model.UserRole = Role.Student;
             try
             {
-                await _userAdministratingService.RegisterAsync(
+                await _userManagmentService.RegisterAsync(
                 new RegisterDTO()
                 {
                     UserRole = model.UserRole,
