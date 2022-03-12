@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BookingAudience.Extensions;
 
 namespace BookingAudience.Controllers
 {
@@ -153,12 +154,38 @@ namespace BookingAudience.Controllers
             var audience = _corpusManagementService.GetAllAudiences().FirstOrDefault(a => a.Building.CodeLetter.ToString().ToLower() == codeLetter.ToString() && a.Number == number);
             if (audience == null)
                 throw new Exception($"Аудитории \"{codeLetter}{number}\" не существует");
-            return View("Audience", 
-                new AudienceViewModel() 
-                { 
-                    Building = audience.Building, 
-                    Floor = audience.Floor, 
-                    Number = audience.Number 
+
+            List<Building> buildings = _corpusManagementService.GetAllBuildings();
+            List<SelectListItem> buildingsOptions = new();
+            for (int i = 0; i < buildings.Count; i++)
+            {
+                buildingsOptions.Add(new SelectListItem(buildings[i].Title, buildings[i].Id.ToString()));
+            }
+            List<SelectListItem> typeOptions = new List<SelectListItem>()
+            {
+                new SelectListItem(AudienceType.ClassRoom.GetDescription(), ((int)AudienceType.ClassRoom).ToString()),
+                new SelectListItem(AudienceType.Audience.GetDescription(), ((int)AudienceType.Audience).ToString()),
+                new SelectListItem(AudienceType.AssemblyHall.GetDescription(), ((int)AudienceType.AssemblyHall).ToString())
+            };
+
+            return View("Audience",
+                new AudienceViewModel()
+                {
+                    Building = audience.Building,
+                    Floor = audience.Floor,
+                    Number = audience.Number,
+                    SeatPlaces = audience.SeatPlaces,
+                    TablesCount = audience.TablesCount,
+                    WorkComputersCount = audience.WorkComputersCount,
+                    HasProjector = audience.HasProjector,
+                    HasAudio = audience.HasAudio,
+                    Title = audience.Title,
+                    Type = audience.Type,
+                    BuildingId = audience.Building.Id,
+                    Description = audience.Description,
+                    IsBlockedByAdmin = audience.IsBlockedByAdmin,
+                    BuildingOptions = buildingsOptions,
+                    TypeOptions = typeOptions
                 });
         }
 

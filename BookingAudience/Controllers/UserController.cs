@@ -1,5 +1,6 @@
 ﻿using BookingAudience.DAL.Repositories;
 using BookingAudience.Enums;
+using BookingAudience.Extensions;
 using BookingAudience.Models;
 using BookingAudience.Models.Users;
 using BookingAudience.Services.Users;
@@ -56,10 +57,19 @@ namespace BookingAudience.Controllers
             {
                 buildingsOptions.Add(new SelectListItem(buildings[i].Title, buildings[i].Id.ToString()));
             }
+
+            List<SelectListItem> typeOptions = new List<SelectListItem>()
+            {
+                new SelectListItem(AudienceType.ClassRoom.GetDescription(), ((int)AudienceType.ClassRoom).ToString()),
+                new SelectListItem(AudienceType.Audience.GetDescription(), ((int)AudienceType.Audience).ToString()),
+                new SelectListItem(AudienceType.AssemblyHall.GetDescription(), ((int)AudienceType.AssemblyHall).ToString())
+            };
+
             return View(new AdminPanelViewModel() 
             { 
                 Buildings = buildings,
-                BuildingsOptions = buildingsOptions
+                BuildingsOptions = buildingsOptions,
+                TypesOptions = typeOptions
             });
         }
 

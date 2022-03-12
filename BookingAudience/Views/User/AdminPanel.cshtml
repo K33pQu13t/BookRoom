@@ -10,7 +10,7 @@
     <div class="view-page">
 
         @await Html.PartialAsync("AdminBuilding", new BuildingViewModel())
-        @await Html.PartialAsync("AdminAudience", new AudienceViewModel() { BuildingOptions = Model.BuildingsOptions})
+        @await Html.PartialAsync("AdminAudience", new AudienceViewModel() { BuildingOptions = Model.BuildingsOptions, TypeOptions = Model.TypesOptions})
         @await Html.PartialAsync("AdminUser", new RegisterViewModel())
 
     </div>

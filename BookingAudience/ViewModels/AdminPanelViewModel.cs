@@ -11,5 +11,6 @@ namespace BookingAudience.ViewModels
     {
         public List<Building> Buildings { get; set; }
         public List<SelectListItem> BuildingsOptions { get; set; }
+        public List<SelectListItem> TypesOptions { get; set; }
     }
 }
