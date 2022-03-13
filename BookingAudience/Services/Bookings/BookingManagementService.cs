@@ -3,7 +3,9 @@ using BookingAudience.DTO.Corpus;
 using BookingAudience.Extensions;
 using BookingAudience.Models;
 using BookingAudience.Models.Users;
+using BookingAudience.Services.Audiences;
 using BookingAudience.Services.Users;
+using BookingAudience.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -17,11 +19,13 @@ namespace BookingAudience.Services.Bookings
         private readonly IGenericRepository<AppUser> usersRepository;
         private readonly UserAuthService userAuthService;
         private readonly UserManager<AppUser> userManager;
-        private readonly IGenericRepository<BookingAudience.Models.Booking> bookingRepository;
+        private readonly IGenericRepository<Booking> bookingRepository;
 
         private readonly DateTime startPossibleTime;
         private readonly DateTime endPossibleTime;
         private const int minimalStepInMinutes = 30;
+        private readonly CorpusManagementService _corpusManagementService;
+
 
         public int CurrentUserId
         {
@@ -82,12 +86,34 @@ namespace BookingAudience.Services.Bookings
             return bookingRepository.Get().Where(b => DateTime.Now < b.BookingTime && b.Creator.Id == currentUser.Id).ToList();
         }
 
+        public async Task<List<TimeRange>> GetAudiencesBooking(int id, DateTime date)
+        {
+            var audience = await _corpusManagementService.GetAudienceAsync(id);
+            List<Booking> bookings = (List<Booking>)bookingRepository.Get()
+                .Where(b => b.BookedAudience == audience &&
+                b.BookingTime.Month == date.Month &&
+                b.BookingTime.Day == date.Day &&
+                b.BookingTime.Year == date.Year);
+            List<TimeRange> timeRanges = new();
+            for (int i = 0; i < bookings.Count; i++)
+            {
+                timeRanges.Add(new TimeRange()
+                {
+                    start = bookings[i].BookingTime.TimeOfDay,
+                    end =
+                    bookings[i].BookingTime.TimeOfDay
+                    .Add(new TimeSpan(minutes: bookings[i].DurationInMinutes, hours: 0, seconds: 0))
+                });
+            }
+            return timeRanges;
+        }
+
         /// <summary>
         /// получить словарь доступного времени в этот день на эту аудиторию
         /// </summary>
         /// <param name="date"></param>
         /// <returns></returns>
-        public Dictionary<DateTime, bool> GetTimeScale(Audience audience, DateTime date)
+        public TimeBooking GetTimeScale(Audience audience, DateTime date)
         {
             List<Booking> bookings = bookingRepository.Get().Where(b => b.BookedAudience.Id == audience.Id).ToList();
 
@@ -130,7 +156,7 @@ namespace BookingAudience.Services.Bookings
                        year: date.Year, month: date.Month, day: date.Day);
             }
 
-            Dictionary<DateTime, bool> result = new Dictionary<DateTime, bool>();
+            TimeBooking result = new TimeBooking();
 
             while (true)
             {

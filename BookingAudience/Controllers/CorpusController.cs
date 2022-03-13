@@ -14,6 +14,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BookingAudience.Extensions;
+using BookingAudience.Services.Bookings;
+using BookingAudience.Services.Users;
 
 namespace BookingAudience.Controllers
 {
@@ -26,6 +28,8 @@ namespace BookingAudience.Controllers
         private readonly IGenericRepository<Audience> _audiencesRepository;
         private readonly IGenericRepository<Building> _buildingsRepository;
         private readonly CorpusManagementService _corpusManagementService;
+        private readonly BookingManagementService _bookingsManagementService;
+        private readonly UserManagementService _userManagementService;
 
         //readonly List<SelectListItem> audienceTypes = new List<SelectListItem>()
         //{
@@ -141,19 +145,19 @@ namespace BookingAudience.Controllers
             };
         }
 
-        [Route("/audiences/{fullNumber}")]
-        public IActionResult GetAudience(string fullNumber)
+        [Route("/audiences/{id}")]
+        public IActionResult GetAudience(int id)
         {
-            char codeLetter = fullNumber[0];
-            int number = 0;
-            if (!int.TryParse(fullNumber.Substring(1), out number))
-            {
-                throw new Exception("Неверный формат названия кабинета");
-            }
+            //char codeLetter = fullNumber[0];
+            //int number = 0;
+            //if (!int.TryParse(fullNumber.Substring(1), out number))
+            //{
+            //    throw new Exception("Неверный формат названия кабинета");
+            //}
 
-            var audience = _corpusManagementService.GetAllAudiences().FirstOrDefault(a => a.Building.CodeLetter.ToString().ToLower() == codeLetter.ToString() && a.Number == number);
+            var audience = _corpusManagementService.GetAllAudiences().FirstOrDefault(a => a.Id == id);
             if (audience == null)
-                throw new Exception($"Аудитории \"{codeLetter}{number}\" не существует");
+                throw new Exception($"Аудитории не существует");
 
             List<Building> buildings = _corpusManagementService.GetAllBuildings();
             List<SelectListItem> buildingsOptions = new();
@@ -206,6 +210,13 @@ namespace BookingAudience.Controllers
             {
 
             }
+            if (int.TryParse(model.Title, out int number))
+            {
+                model.Number = number;
+            }
+            else
+                model.Number = -1;
+
             var building = await _buildingsRepository.GetAsync(model.BuildingId);
             await _corpusManagementService.PushAudienceAsync(new Audience() 
             {
@@ -247,6 +258,19 @@ namespace BookingAudience.Controllers
                 buildingsOptions.Add(new SelectListItem(buildings[i].Title, buildings[i].Id.ToString()));
             }
             return RedirectToAction("AdminPanel", "User", new AdminPanelViewModel() { Buildings = buildings, BuildingsOptions = buildingsOptions});
+        }
+
+        public async Task<IActionResult> SetDayToBook(DateTime date, int audienceId)
+        {
+            Audience audience = await _corpusManagementService.GetAudienceAsync(audienceId);
+            TimeBooking timeRangeBooked = _bookingsManagementService.GetTimeScale(audience, date);
+
+            return PartialView("BookingForm", new BookingTimeViewModel() 
+            { 
+                DateOfBooking = date,
+                TimeElements = timeRangeBooked,
+                TimeRangeBooked = await _bookingsManagementService.GetAudiencesBooking(audienceId, date)
+            });
         }
     }
 }

@@ -46,8 +46,8 @@
 
                             @while (floor == Model.ListOfListsOfAudiences[i][j].Floor)
                             {
-                                <a asp-controller="Corpus" asp-action="GetAudience" asp-route-fullNumber="@($"{Model.ListOfListsOfAudiences[i][j].Building.CodeLetter}{Model.ListOfListsOfAudiences[i][j].Number}")" class="service audience">
-                                    <span class="title">@($"{Model.ListOfListsOfAudiences[i][j].Building.CodeLetter}{Model.ListOfListsOfAudiences[i][j].Number}")</span>
+                                <a asp-controller="Corpus" asp-action="GetAudience" asp-route-id="@($"{Model.ListOfListsOfAudiences[i][j].Id}")" class="service audience">
+                                    <span class="title">@($"{Model.ListOfListsOfAudiences[i][j].Title}")</span>
                                     <span class="description">@Model.ListOfListsOfAudiences[i][j].Building.Title, этаж @floor</span>
                                 </a>
                                 j++;

@@ -39,8 +39,6 @@ namespace BookingAudience.Services.Audiences
 
         public async Task PushAudienceAsync(Audience audience)
         {
-            if (!string.IsNullOrEmpty(audience.Title))
-                audience.Number = -1;
             await _audiencesRepository.CreateAsync(audience);
         }
 

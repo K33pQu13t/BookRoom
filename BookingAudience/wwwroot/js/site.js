@@ -52,3 +52,19 @@ function updateAudiences() {
         }
     });
 }
+
+function updateBooking() {
+    let b = document.getElementById("filter-building");
+    let buildingId = b.value;
+
+    $.ajax({
+        url: '/audiences/filtered',
+        data: { buildingId: buildingId, floor: floor, type: type },
+        success: function (response) {
+            $('#audiences').html(response);
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            alert(xhr.responseText);
+        }
+    });
+}

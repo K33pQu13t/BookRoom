@@ -21,7 +21,7 @@
 
                     <div>
                         Choose:
-                        <select class="filter" name="" id="">
+                        <select class="filter" name="" id="" onchange="">
                             <option disabled selected hidden>Day</option>
                             @* TODO: гинерить *@
                             <option value="">13</option>
@@ -32,88 +32,8 @@
                 }   
             } 
 
-
-            <div class="booking-configurator">
-                Already Booked:
-                <div class="booked">
-                    @* TODO: гинерить *@
-                    <span>11:30-12:30</span>
-                    <span>12:30-15:00</span>
-                    <span>18:30-20:00</span>
-                    <span>18:30-20:00</span>
-                    <span>18:30-20:00</span>
-                </div>
-                <form action="">
-                    Select booking time
-                    <div>
-                        <select class="filter" name="" id="">
-                            <option disabled selected hidden>From</option>
-                            @* TODO: гинерить *@
-                            <option value="">8:00</option>
-                            <option value="">8:30</option>
-                            <option value="">9:00</option>
-                            <option value="">9:30</option>
-                            <option value="">10:00</option>
-                            <option value="">10:30</option>
-                            <option value="">11:00</option>
-                            <option value="" disabled>11:30</option>
-                            <option value="" disabled>12:00</option>
-                            <option value="" disabled>12:30</option>
-                            <option value="" disabled>13:00</option>
-                            <option value="" disabled>13:30</option>
-                            <option value="" disabled>14:00</option>
-                            <option value="" disabled>14:30</option>
-                            <option value="">15:00</option>
-                            <option value="">15:30</option>
-                            <option value="">16:00</option>
-                            <option value="">16:30</option>
-                            <option value="">17:00</option>
-                            <option value="">17:30</option>
-                            <option value="" disabled>18:00</option>
-                            <option value="" disabled>18:30</option>
-                            <option value="" disabled>19:00</option>
-                            <option value="" disabled>19:30</option>
-                            <option value="">20:00</option>
-                            <option value="">20:30</option>
-                            <option value="">21:00</option>
-                            <option value="">21:30</option>
-                        </select>
-                        <select class="filter" name="" id="">
-                            <option disabled selected hidden>To</option>
-                            @* TODO: гинерить *@
-                            <option value="">8:30</option>
-                            <option value="">9:00</option>
-                            <option value="">9:30</option>
-                            <option value="">10:00</option>
-                            <option value="">10:30</option>
-                            <option value="">11:00</option>
-                            <option value="">11:30</option>
-                            <option value="" disabled>12:00</option>
-                            <option value="" disabled>12:30</option>
-                            <option value="" disabled>13:00</option>
-                            <option value="" disabled>13:30</option>
-                            <option value="" disabled>14:00</option>
-                            <option value="" disabled>14:30</option>
-                            <option value="" disabled>15:00</option>
-                            <option value="">15:30</option>
-                            <option value="">16:00</option>
-                            <option value="">16:30</option>
-                            <option value="">17:00</option>
-                            <option value="">17:30</option>
-                            <option value="">18:00</option>
-                            <option value="" disabled>18:30</option>
-                            <option value="" disabled>19:00</option>
-                            <option value="" disabled>19:30</option>
-                            <option value="" disabled>20:00</option>
-                            <option value="">20:30</option>
-                            <option value="">21:00</option>
-                            <option value="">21:30</option>
-                            <option value="">22:00</option>
-                        </select>
-                    </div>
-                    <button type="submit">Schedule a booking</button>
-                </form>
-            </div>
+            @* partial view *@
+           <div id="booking-form"></div>
 
         </div>
         <div class="audience-detail">

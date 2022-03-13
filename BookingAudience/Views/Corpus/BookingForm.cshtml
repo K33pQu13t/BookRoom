@@ -1,0 +1,137 @@
+﻿@using BookingAudience.ViewModels;
+@model AudienceViewModel; 
+
+@{
+    ViewData["Title"] = $"{Model.Building.CodeLetter}{Model.Number}".ToUpper();
+}
+
+<div class="category-title">Audience @ViewData["Title"]</div>
+    <div class="category-content audience">
+
+        <div class="booking">
+            @* TODO: гинерить сюда вместо всего форму редакта для админануса *@
+
+            @{
+                if (Model.IsBlockedByAdmin) {
+                    <div>
+                        Эту аудиторию нельзя забронировать, подробнее узнайте у админимтратора.
+                    </div>
+                } else {
+                    <span>Booking</span>
+
+                    <div>
+                        Choose:
+                        <select class="filter" name="" id="">
+                            <option disabled selected hidden>Day</option>
+                            @* TODO: гинерить *@
+                            <option value="">13</option>
+                            <option value="">14</option>
+                            <option value="">15</option>
+                        </select>
+                    </div>
+                }   
+            } 
+
+
+            <div class="booking-configurator">
+                Already Booked:
+                <div class="booked">
+                    @* TODO: гинерить *@
+                    <span>11:30-12:30</span>
+                    <span>12:30-15:00</span>
+                    <span>18:30-20:00</span>
+                    <span>18:30-20:00</span>
+                    <span>18:30-20:00</span>
+                </div>
+                <form action="">
+                    Select booking time
+                    <div>
+                        <select class="filter" name="" id="">
+                            <option disabled selected hidden>From</option>
+                            @* TODO: гинерить *@
+                            <option value="">8:00</option>
+                            <option value="">8:30</option>
+                            <option value="">9:00</option>
+                            <option value="">9:30</option>
+                            <option value="">10:00</option>
+                            <option value="">10:30</option>
+                            <option value="">11:00</option>
+                            <option value="" disabled>11:30</option>
+                            <option value="" disabled>12:00</option>
+                            <option value="" disabled>12:30</option>
+                            <option value="" disabled>13:00</option>
+                            <option value="" disabled>13:30</option>
+                            <option value="" disabled>14:00</option>
+                            <option value="" disabled>14:30</option>
+                            <option value="">15:00</option>
+                            <option value="">15:30</option>
+                            <option value="">16:00</option>
+                            <option value="">16:30</option>
+                            <option value="">17:00</option>
+                            <option value="">17:30</option>
+                            <option value="" disabled>18:00</option>
+                            <option value="" disabled>18:30</option>
+                            <option value="" disabled>19:00</option>
+                            <option value="" disabled>19:30</option>
+                            <option value="">20:00</option>
+                            <option value="">20:30</option>
+                            <option value="">21:00</option>
+                            <option value="">21:30</option>
+                        </select>
+                        <select class="filter" name="" id="">
+                            <option disabled selected hidden>To</option>
+                            @* TODO: гинерить *@
+                            <option value="">8:30</option>
+                            <option value="">9:00</option>
+                            <option value="">9:30</option>
+                            <option value="">10:00</option>
+                            <option value="">10:30</option>
+                            <option value="">11:00</option>
+                            <option value="">11:30</option>
+                            <option value="" disabled>12:00</option>
+                            <option value="" disabled>12:30</option>
+                            <option value="" disabled>13:00</option>
+                            <option value="" disabled>13:30</option>
+                            <option value="" disabled>14:00</option>
+                            <option value="" disabled>14:30</option>
+                            <option value="" disabled>15:00</option>
+                            <option value="">15:30</option>
+                            <option value="">16:00</option>
+                            <option value="">16:30</option>
+                            <option value="">17:00</option>
+                            <option value="">17:30</option>
+                            <option value="">18:00</option>
+                            <option value="" disabled>18:30</option>
+                            <option value="" disabled>19:00</option>
+                            <option value="" disabled>19:30</option>
+                            <option value="" disabled>20:00</option>
+                            <option value="">20:30</option>
+                            <option value="">21:00</option>
+                            <option value="">21:30</option>
+                            <option value="">22:00</option>
+                        </select>
+                    </div>
+                    <button type="submit">Schedule a booking</button>
+                </form>
+            </div>
+
+        </div>
+        <div class="audience-detail">
+            <span>@Model.Title</span>
+            @if (!string.IsNullOrEmpty(Model.Description)) {
+                <div class="attribute" data-attr-title="Описание">@Model.Description</div>
+            }
+            <div class="attribute" data-attr-title="Тип">@Model.Type</div>
+            <div class="attribute" data-attr-title="Расположение">@ViewData["Title"], этаж @Model.Floor</div>
+            <div class="attribute" data-attr-title="Вместительность">@Model.SeatPlaces</div>
+            @if (Model.TablesCount > 0) {
+                <div class="attribute" data-attr-title="Количество столов">@Model.TablesCount</div>
+            }
+            @if (Model.WorkComputersCount > 0) {
+                <div class="attribute" data-attr-title="Компьютеры">@Model.WorkComputersCount</div>
+            }
+            <div class="attribute" data-attr-title="Проектор">@(Model.HasProjector ? "Да" : "Нет")</div>
+            <div class="attribute" data-attr-title="Аудио система">@(Model.HasAudio ? "Да" : "Нет")</div>
+        </div>
+
+</div>
